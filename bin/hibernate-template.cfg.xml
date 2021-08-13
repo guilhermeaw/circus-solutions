@@ -13,7 +13,7 @@
 		<property name="hibernate.format_sql">false</property>
 		<property name="hbm2ddl.auto">update</property>
 
-		<mapping class="Mapping class" />
+		<mapping class="entities.Artist" />
 
 	</session-factory>
 </hibernate-configuration>

@@ -27,7 +27,7 @@ public class Database {
     }
   }
 
-  public Session getSession() {
+  public Session openSession() {
     Session session = sessionFactory.openSession();
     return session;
   }

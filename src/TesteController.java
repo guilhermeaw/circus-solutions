@@ -1,10 +1,4 @@
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.boot.MetadataSources;
-import org.hibernate.boot.registry.StandardServiceRegistry;
-import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
-
-import db.Database;
+import db.managers.ArtistManager;
 import entities.Artist;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -20,12 +14,10 @@ public class TesteController {
     artist.setId(1);
     artist.setName("Guilherme");
 
-    Database db = Database.getInstance();
-    Session session = db.getSession();
+    try {
+      new ArtistManager().create(artist);
+    } catch(Exception error) {
 
-    session.beginTransaction();
-    session.save(artist);
-    session.getTransaction().commit();
-    session.close();
+    }
   }
 }

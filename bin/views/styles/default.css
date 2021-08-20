@@ -1,0 +1,26 @@
+@font-face {
+  font-family: 'cuprum';
+  src: url('cuprum.ttf');
+}
+
+.text {
+  -fx-font-family: "cuprum";
+  -fx-font-size: 16;
+}
+
+.button {
+  -fx-background-color: #FFB84D;
+  -fx-border-radius: 4;
+  -fx-padding: 12;
+  -fx-cursor: hand;
+}
+
+.link {
+  -fx-background-color: transparent;
+  -fx-text-fill: #FFB84D;
+}
+
+.textfield {
+  -fx-background-color:  #E4E4EB;
+  -fx-padding: 8 4;
+}

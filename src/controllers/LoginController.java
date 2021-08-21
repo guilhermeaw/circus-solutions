@@ -22,7 +22,7 @@ public class LoginController {
 
     @FXML
     void handleLogin(ActionEvent event) {
-      System.out.println("teste");
+      new SceneChangeService().changeSceneTo("/views/dashboard.fxml");
     }
 
     @FXML

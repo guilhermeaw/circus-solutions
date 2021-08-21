@@ -7,26 +7,26 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import services.SceneChangeService;
 
-public class LoginController {
+public class SignupController {
     @FXML
     private TextField fieldLogin;
 
     @FXML
-    private PasswordField fieldPassword;
+    private TextField fieldName;
 
     @FXML
-    private Button buttonLogin;
+    private PasswordField fieldPassword;
 
     @FXML
     private Button buttonSignup;
 
     @FXML
     void handleLogin(ActionEvent event) {
-      System.out.println("teste");
+
     }
 
     @FXML
     void handleSignup(ActionEvent event) {
-      new SceneChangeService().changeSceneTo("/views/signup.fxml");
+        new SceneChangeService().changeSceneTo("/views/login.fxml");
     }
 }

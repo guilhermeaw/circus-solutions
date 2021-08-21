@@ -44,7 +44,7 @@
                         <Font name="System Bold" size="16.0" />
                      </font>
                   </Button>
-                  <Button mnemonicParsing="false" prefHeight="49.0" prefWidth="301.0" style="-fx-background-color: transparent; -fx-font-weight: bold;" text="Funcionários" textFill="WHITE">
+                  <Button mnemonicParsing="false" prefHeight="49.0" prefWidth="301.0" style="-fx-background-color: transparent; -fx-font-weight: bold;" text="Localidades" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="16.0" />
                      </font>
@@ -53,6 +53,6 @@
             </VBox>
          </children>
       </VBox>
-      <StackPane layoutX="294.0" layoutY="82.0" prefHeight="638.0" prefWidth="986.0" style="-fx-background-color: #FFF;" />
+      <StackPane fx:id="dashboardStackPane" alignment="TOP_LEFT" layoutX="294.0" layoutY="82.0" prefHeight="638.0" prefWidth="986.0" style="-fx-background-color: #FFF;" />
    </children>
 </AnchorPane>

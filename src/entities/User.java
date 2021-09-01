@@ -2,6 +2,8 @@ package entities;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -12,6 +14,7 @@ import org.hibernate.annotations.NaturalId;
 @Table(name="users")
 public class User {
   @Id
+  @GeneratedValue(strategy = GenerationType.AUTO)
   @Column(name="id")
   private int id;
   
@@ -20,7 +23,8 @@ public class User {
 
   private String name;
 
-  @Column(name = "password")
+  @Column
+  @ColumnTransformer(read = "pgp_sym_decrypt(password, 'password')", write = "pgp_sym_encrypt(?, 'password')")
   private String password;
 
   public int getId() {

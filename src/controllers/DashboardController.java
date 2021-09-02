@@ -10,7 +10,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.layout.StackPane;
-import services.SceneChangeService;
+import services.LoginService;
 import utils.ApplicationUtilities;
 
 public class DashboardController implements Initializable {
@@ -27,7 +27,7 @@ public class DashboardController implements Initializable {
     
     @FXML
     void handleLogout(ActionEvent event) {
-      new SceneChangeService().changeSceneTo("/views/login.fxml");
+      LoginService.doLogout();
     }
 
     private void loadDefaultPane() {

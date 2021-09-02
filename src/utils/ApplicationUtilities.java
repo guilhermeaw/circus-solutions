@@ -1,5 +1,6 @@
 package utils;
 
+import entities.User;
 import javafx.stage.Stage;
 
 public class ApplicationUtilities {
@@ -14,6 +15,7 @@ public class ApplicationUtilities {
   }
 
   private Stage primaryStage;
+  private User activeUser;
 
   public Stage getPrimaryStage() {
       return primaryStage;
@@ -25,5 +27,13 @@ public class ApplicationUtilities {
 
   public void handleException(Exception e) {
     e.printStackTrace();
+  }
+
+  public User getActiveUser() {
+      return activeUser;
+  }
+
+  public void setActiveUser(User activeUser) {
+      this.activeUser = activeUser;
   }
 }

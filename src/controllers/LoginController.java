@@ -1,10 +1,13 @@
 package controllers;
 
+import common.Credentials;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import services.AlertService;
+import services.LoginService;
 import services.SceneChangeService;
 
 public class LoginController {
@@ -22,7 +25,16 @@ public class LoginController {
 
     @FXML
     void handleLogin(ActionEvent event) {
-      new SceneChangeService().changeSceneTo("/views/dashboard.fxml");
+      try {
+        String login = fieldLogin.getText();
+        String password = fieldPassword.getText();
+
+        LoginService.doLogin(new Credentials(login, password));
+
+        new SceneChangeService().changeSceneTo("/views/dashboard.fxml");
+      } catch (Exception e) {
+        AlertService.showWarning(e.getMessage());
+      }
     }
 
     @FXML

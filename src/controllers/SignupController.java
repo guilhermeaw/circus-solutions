@@ -1,6 +1,6 @@
 package controllers;
 
-import db.managers.UserManager;
+import common.Credentials;
 import entities.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -8,6 +8,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import services.SceneChangeService;
+import services.UserService;
 import utils.ApplicationUtilities;
 
 public class SignupController {
@@ -40,9 +41,10 @@ public class SignupController {
         user.setPassword(password);
         
         try {
-            new UserManager().create(user);
+            UserService.createUser(new Credentials(login, password), name);
+            new SceneChangeService().changeSceneTo("/views/login.fxml");
         } catch (Exception e) {
             ApplicationUtilities.getInstance().handleException(e);
-        } 
+        }
     }
 }

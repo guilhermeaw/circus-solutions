@@ -11,8 +11,6 @@ public class App extends Application {
         launch(args);
     }
 
-    //teste commit
-
     @Override
     public void start(Stage primaryStage) throws Exception {
         ApplicationUtilities.getInstance().setPrimaryStage(primaryStage);

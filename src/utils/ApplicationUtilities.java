@@ -2,6 +2,7 @@ package utils;
 
 import entities.User;
 import javafx.stage.Stage;
+import java.util.List;
 
 public class ApplicationUtilities {
   private static ApplicationUtilities instance;
@@ -36,4 +37,14 @@ public class ApplicationUtilities {
   public void setActiveUser(User activeUser) {
       this.activeUser = activeUser;
   }
+
+  public String formatErrorMessage(List<String> errors) {
+    String errorMessage = "";
+
+    for (String error : errors) {
+        errorMessage += "\n" + error;
+    }
+
+    return errorMessage;
+}
 }

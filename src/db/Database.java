@@ -23,7 +23,7 @@ public class Database {
     try {
       setupHibernate();
     } catch (Exception error) {
-
+      System.out.println("Não foi possível conectar-se ao banco de dados.");
     }
   }
 
@@ -43,6 +43,7 @@ public class Database {
     catch (Exception e) {
       // The registry would be destroyed by the SessionFactory, but we had trouble building the SessionFactory
       // so destroy it manually.
+      System.out.println("Não foi possível conectar-se ao banco de dados, registro destruído.");
       StandardServiceRegistryBuilder.destroy( registry );
     }
   }

@@ -5,11 +5,11 @@ import java.util.List;
 import org.hibernate.Session;
 
 import db.Database;
-import entities.Occupations;
+import entities.Occupation;
 
-public class OccupationsManager implements IDefaultManager<Occupations> {
+public class OccupationsManager implements IDefaultManager<Occupation> {
   @Override
-  public void create(Occupations value) throws Exception {
+  public void create(Occupation value) throws Exception {
     Database db = Database.getInstance();
     Session session = db.openSession();
 
@@ -20,25 +20,25 @@ public class OccupationsManager implements IDefaultManager<Occupations> {
   }
 
   @Override
-  public void update(Occupations value) throws Exception {
+  public void update(Occupation value) throws Exception {
     // TODO Auto-generated method stub
     
   }
 
   @Override
-  public void delete(Occupations value) throws Exception {
+  public void delete(Occupation value) throws Exception {
     // TODO Auto-generated method stub
     
   }
 
   @Override
-  public Occupations getById(int id) throws Exception {
+  public Occupation getById(int id) throws Exception {
     // TODO Auto-generated method stub
     return null;
   }
 
   @Override
-  public List<Occupations> getAll() throws Exception {
+  public List<Occupation> getAll() throws Exception {
     // TODO Auto-generated method stub
     return null;
   }

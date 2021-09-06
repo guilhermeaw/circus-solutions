@@ -12,22 +12,23 @@
    <children>
       <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="986.0">
          <children>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Cargos" translateX="20.0" underline="true">
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Artistas" translateX="20.0" underline="true">
                <font>
                   <Font size="24.0" />
                </font>
             </Text>
-            <Button fx:id="buttonAdd" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleAddOccupation" prefHeight="49.0" prefWidth="122.0" text="Adicionar" translateX="505.0" />
-            <Button fx:id="buttonEdit" mnemonicParsing="false" onAction="#handleEditOccupation" prefHeight="49.0" prefWidth="122.0" text="Editar" translateX="525.0" />
-            <Button fx:id="buttonDelete" alignment="CENTER" mnemonicParsing="false" onAction="#handleDeleteOccupation" prefHeight="49.0" prefWidth="122.0" text="Excluir" translateX="540.0" />
+            <Button fx:id="buttonAdd" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleAddArtist" prefHeight="49.0" prefWidth="122.0" text="Adicionar" translateX="500.0" />
+            <Button fx:id="buttonEdit" mnemonicParsing="false" onAction="#handleEditArtist" prefHeight="49.0" prefWidth="122.0" text="Editar" translateX="520.0" />
+            <Button fx:id="buttonDelete" alignment="CENTER" mnemonicParsing="false" onAction="#handleDeleteArtist" prefHeight="49.0" prefWidth="122.0" text="Excluir" translateX="535.0" />
          </children>
       </HBox>
       <TableView layoutX="14.0" layoutY="84.0" prefHeight="548.0" prefWidth="964.0">
-        <columns>
-          <TableColumn prefWidth="145.0" text="Id" />
-          <TableColumn prefWidth="248.0" text="Nome" />
-            <TableColumn prefWidth="570.0" text="Descrição" />
-        </columns>
+         <columns>
+            <TableColumn prefWidth="187.0" text="Nome" />
+            <TableColumn prefWidth="239.0" text="Cargo" />
+            <TableColumn minWidth="0.0" prefWidth="308.0" text="Telefone" />
+            <TableColumn minWidth="0.0" prefWidth="229.0" text="CPF" />
+         </columns>
       </TableView>
    </children>
 </Pane>

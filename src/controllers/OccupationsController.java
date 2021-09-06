@@ -22,24 +22,15 @@ public class OccupationsController {
     private Button buttonOccupations;
 
     @FXML
-    void handleAddOccupation(ActionEvent event) {
-        
+    void handleAddOccupation(ActionEvent event) {   
     }
 
     @FXML
-    void handleSignup(ActionEvent event) {
-        String name = fieldName.getText();
-        String description = fieldDescription.getText();
+    void handleEditOcuppation(ActionEvent event) {
+    }
 
-        Occupation occupation = new Occupation();
-        occupation.setName(name);
-        occupation.setDescription(description);
-
-        try {
-            UserService.createUser(new Credentials(name, description), name);
-            new SceneChangeService().changeSceneTo("/views/occupation.fxml");
-        } catch (Exception e) {
-            ApplicationUtilities.getInstance().handleException(e);
-        }
+    @FXML
+    void handleDeleteOccupation(ActionEvent event) {
+        
     }
 }

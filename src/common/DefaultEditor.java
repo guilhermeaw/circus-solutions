@@ -1,6 +1,5 @@
 package common;
 
-import common.EditorCallback;
 import javafx.collections.ObservableList;
 import javafx.event.Event;
 import javafx.event.EventHandler;

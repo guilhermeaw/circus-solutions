@@ -1,16 +1,10 @@
 package controllers;
 
-import common.Credentials;
-import editors.OccupationEditor;
-import entities.Occupation;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import services.SceneChangeService;
-import services.UserService;
-import utils.ApplicationUtilities;
 
 public class OccupationsController {
     @FXML
@@ -28,7 +22,7 @@ public class OccupationsController {
 
     @FXML
     void handleAddOccupation(ActionEvent event) {   
-        
+
     }
 
     @FXML

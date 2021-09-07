@@ -9,7 +9,19 @@ import entities.User;
 import utils.ApplicationUtilities;
 
 public class UserManager implements IDefaultManager<User> {
+  private static UserManager instance;
   private Database db = Database.getInstance();
+
+  private void UserManager() {
+  }
+
+  public static UserManager getInstance() {
+    if (instance == null){
+      instance = new UserManager();
+    }
+
+    return instance;
+  }
 
   @Override
   public void create(User value) throws Exception {

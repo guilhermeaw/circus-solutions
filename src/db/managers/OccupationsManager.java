@@ -5,25 +5,24 @@ import java.util.List;
 import org.hibernate.Session;
 
 import db.Database;
-import entities.Artist;
+import entities.Occupation;
 
-public class ArtistManager implements IDefaultManager<Artist> {
-  private static ArtistManager instance;
-  private Database db = Database.getInstance();
+public class OccupationsManager implements IDefaultManager<Occupation> {
+  private static OccupationsManager instance;
 
-  private void ArtistManager() {
+  private void OccupationsManager() {
   }
 
-  public static ArtistManager getInstance() {
+  public static OccupationsManager getInstance() {
     if (instance == null){
-      instance = new ArtistManager();
+      instance = new OccupationsManager();
     }
 
     return instance;
   }
-  
+
   @Override
-  public void create(Artist value) throws Exception {
+  public void create(Occupation value) throws Exception {
     Database db = Database.getInstance();
     Session session = db.openSession();
 
@@ -34,25 +33,25 @@ public class ArtistManager implements IDefaultManager<Artist> {
   }
 
   @Override
-  public void update(Artist value) throws Exception {
+  public void update(Occupation value) throws Exception {
     // TODO Auto-generated method stub
     
   }
 
   @Override
-  public void delete(Artist value) throws Exception {
+  public void delete(Occupation value) throws Exception {
     // TODO Auto-generated method stub
     
   }
 
   @Override
-  public Artist getById(int id) throws Exception {
+  public Occupation getById(int id) throws Exception {
     // TODO Auto-generated method stub
     return null;
   }
 
   @Override
-  public List<Artist> getAll() throws Exception {
+  public List<Occupation> getAll() throws Exception {
     // TODO Auto-generated method stub
     return null;
   }

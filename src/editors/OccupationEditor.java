@@ -31,4 +31,6 @@ public class OccupationEditor extends DefaultEditor<Occupation> {
         // TODO Auto-generated method stub
         
     }
+
+    private void initComponents() {}
 }

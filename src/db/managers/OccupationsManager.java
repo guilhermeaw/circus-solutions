@@ -7,7 +7,7 @@ import org.hibernate.Session;
 import db.Database;
 import entities.Occupation;
 
-public class OccupationsManager implements IDefaultManager<Occupation> {
+public class OccupationsManager extends DefaultManager<Occupation> {
   private static OccupationsManager instance;
 
   private void OccupationsManager() {
@@ -21,37 +21,7 @@ public class OccupationsManager implements IDefaultManager<Occupation> {
     return instance;
   }
 
-  @Override
-  public void create(Occupation value) throws Exception {
-    Database db = Database.getInstance();
-    Session session = db.openSession();
-
-    session.beginTransaction();
-    session.save(value);
-    session.getTransaction().commit();
-    session.close();    
-  }
-
-  @Override
-  public void update(Occupation value) throws Exception {
-    // TODO Auto-generated method stub
-    
-  }
-
-  @Override
-  public void delete(Occupation value) throws Exception {
-    // TODO Auto-generated method stub
-    
-  }
-
-  @Override
-  public Occupation getById(int id) throws Exception {
-    // TODO Auto-generated method stub
-    return null;
-  }
-
-  @Override
-  public List<Occupation> getAll() throws Exception {
+  public List<Occupation> getAll() {
     // TODO Auto-generated method stub
     return null;
   }

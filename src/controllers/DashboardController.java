@@ -20,10 +20,24 @@ public class DashboardController implements Initializable {
     @FXML
     private StackPane dashboardStackPane;
 
+    @FXML
+    private Button artistsButton;
+
+    @FXML
+    private Button occupationsButton;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
       loadDefaultPane();
     }
+
+    public void handleChangePane(ActionEvent actionEvent) {
+      if (actionEvent.getSource() == artistsButton) {
+          loadPane("/views/components/panes/artist.fxml");
+      } else if (actionEvent.getSource() == occupationsButton) {
+          loadPane("/views/components/panes/occupation.fxml");
+      }
+  }
     
     @FXML
     void handleLogout(ActionEvent event) {
@@ -31,7 +45,7 @@ public class DashboardController implements Initializable {
     }
 
     private void loadDefaultPane() {
-      loadPane("/views/components/panes/citiesStatesTabbedPane.fxml");
+      loadPane("/views/components/panes/artist.fxml");
     }
 
     private void loadPane(String paneSrc) {

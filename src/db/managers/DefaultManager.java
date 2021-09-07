@@ -1,7 +1,5 @@
 package db.managers;
 
-import java.util.List;
-
 import org.hibernate.Session;
 
 import db.Database;
@@ -18,7 +16,7 @@ public abstract class DefaultManager<T> {
       session.getTransaction().commit();
       session.close(); 
     } catch (Exception e) {
-      ApplicationUtilities.getInstance().handleException(e);
+      handleException(e);
     }
   };
 
@@ -32,7 +30,7 @@ public abstract class DefaultManager<T> {
       session.getTransaction().commit();
       session.close(); 
     } catch (Exception e) {
-      ApplicationUtilities.getInstance().handleException(e);
+      handleException(e);
     }
   }
 
@@ -48,7 +46,7 @@ public abstract class DefaultManager<T> {
       session.getTransaction().commit();
       session.close(); 
     } catch (Exception e) {
-      ApplicationUtilities.getInstance().handleException(e);
+      handleException(e);
     }  
 
     return value;
@@ -64,7 +62,11 @@ public abstract class DefaultManager<T> {
       session.getTransaction().commit();
       session.close(); 
     } catch (Exception e) {
-      ApplicationUtilities.getInstance().handleException(e);
+      handleException(e);
     }
+  }
+
+  public void handleException(Exception e) {
+    ApplicationUtilities.getInstance().handleException(e);
   }
 }

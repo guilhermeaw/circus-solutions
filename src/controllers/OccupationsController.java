@@ -1,6 +1,7 @@
 package controllers;
 
 import common.Credentials;
+import editors.OccupationEditor;
 import entities.Occupation;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -21,16 +22,22 @@ public class OccupationsController {
     @FXML
     private Button buttonOccupations;
 
+    public void refreshContent() {
+        
+    }
+
     @FXML
     void handleAddOccupation(ActionEvent event) {   
+        
     }
 
     @FXML
     void handleEditOcuppation(ActionEvent event) {
+        
     }
 
     @FXML
     void handleDeleteOccupation(ActionEvent event) {
         
-    }
+    }   
 }

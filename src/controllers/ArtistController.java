@@ -97,7 +97,21 @@ public class ArtistController implements Initializable {
 
   @FXML
   public void handleDeleteArtist(ActionEvent event) {
+    Artist selectedArtist = artistsTable.getSelectionModel().getSelectedItem();
 
+    if (selectedArtist != null) {
+      if (AlertService.showConfirmation("Tem certeza que deseja excluir o artista " + selectedArtist.getName() + "?")) {
+        try {
+          ArtistManager.getInstance().delete(selectedArtist);
+
+          refreshContent();
+        } catch (Exception e) {
+          ApplicationUtilities.getInstance().handleException(e);
+        }
+      }
+    } else {
+      AlertService.showWarning("É necessário selecionar um artista");
+    }
   }
 
   @FXML

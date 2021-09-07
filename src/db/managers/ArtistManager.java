@@ -9,10 +9,6 @@ import entities.Artist;
 
 public class ArtistManager implements IDefaultManager<Artist> {
   private static ArtistManager instance;
-  private Database db = Database.getInstance();
-
-  private void ArtistManager() {
-  }
 
   public static ArtistManager getInstance() {
     if (instance == null){
@@ -20,6 +16,9 @@ public class ArtistManager implements IDefaultManager<Artist> {
     }
 
     return instance;
+  }
+  
+  private void ArtistManager() {
   }
   
   @Override

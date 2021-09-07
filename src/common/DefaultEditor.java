@@ -1,6 +1,5 @@
 package common;
 
-import common.EditorCallback;
 import javafx.collections.ObservableList;
 import javafx.event.Event;
 import javafx.event.EventHandler;
@@ -60,7 +59,7 @@ public abstract class DefaultEditor<T> extends Dialog<T> {
         }
     }
 
-    public void initComponents() {
+    private void initComponents() {
         setTitle( "Editor" );
         setHeaderText( "Editor de Items" );
         setResizable( false );

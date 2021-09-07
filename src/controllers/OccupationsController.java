@@ -21,17 +21,17 @@ public class OccupationsController {
     }
 
     @FXML
-    void handleAddOccupation(ActionEvent event) {   
+    public void handleAddOccupation(ActionEvent event) {   
 
     }
 
     @FXML
-    void handleEditOcuppation(ActionEvent event) {
+    public void handleEditOccupation(ActionEvent event) {
         
     }
 
     @FXML
-    void handleDeleteOccupation(ActionEvent event) {
+    public void handleDeleteOccupation(ActionEvent event) {
         
     }   
 }

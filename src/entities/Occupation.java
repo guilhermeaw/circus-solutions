@@ -12,13 +12,13 @@ import javax.persistence.Table;
 public class Occupation {
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
-  @Column(name="id")
+  @Column(name="id", unique=true, nullable=false)
   private int id;
   
-  @Column(name="name")
+  @Column(name="name", nullable=false, length=200)
   private String name;
 
-  @Column(name="description")
+  @Column(name="description", nullable=false, length=500)
   private String description;
 
   public int getId() {

@@ -8,6 +8,19 @@ import db.Database;
 import entities.Occupation;
 
 public class OccupationsManager implements IDefaultManager<Occupation> {
+  private static OccupationsManager instance;
+
+  private void OccupationsManager() {
+  }
+
+  public static OccupationsManager getInstance() {
+    if (instance == null){
+      instance = new OccupationsManager();
+    }
+
+    return instance;
+  }
+
   @Override
   public void create(Occupation value) throws Exception {
     Database db = Database.getInstance();

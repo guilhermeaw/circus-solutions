@@ -8,6 +8,20 @@ import db.Database;
 import entities.Artist;
 
 public class ArtistManager implements IDefaultManager<Artist> {
+  private static ArtistManager instance;
+  private Database db = Database.getInstance();
+
+  private void ArtistManager() {
+  }
+
+  public static ArtistManager getInstance() {
+    if (instance == null){
+      instance = new ArtistManager();
+    }
+
+    return instance;
+  }
+  
   @Override
   public void create(Artist value) throws Exception {
     Database db = Database.getInstance();

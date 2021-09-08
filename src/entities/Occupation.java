@@ -2,20 +2,25 @@ package entities;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Table(name="occupation")
 public class Occupation {
   @Id
-  @Column(name="id")
+  @GenericGenerator(name="incgenerator" , strategy="increment")
+  @GeneratedValue(generator="incgenerator")
+  @Column(name="id", unique=true, nullable=false)
   private int id;
   
-  @Column(name="name")
+  @Column(name="name", nullable=false, length=200)
   private String name;
 
-  @Column(name="description")
+  @Column(name="description", nullable=false, length=500)
   private String description;
 
   public int getId() {

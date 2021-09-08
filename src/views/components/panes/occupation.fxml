@@ -22,11 +22,10 @@
             <Button fx:id="buttonDelete" alignment="CENTER" mnemonicParsing="false" onAction="#handleDeleteOccupation" prefHeight="49.0" prefWidth="122.0" text="Excluir" translateX="540.0" />
          </children>
       </HBox>
-      <TableView layoutX="14.0" layoutY="84.0" prefHeight="548.0" prefWidth="964.0">
+      <TableView fx:id="occupationsTable" accessibleRole="IMAGE_VIEW" layoutX="14.0" layoutY="84.0" prefHeight="548.0" prefWidth="964.0">
         <columns>
-          <TableColumn prefWidth="145.0" text="Id" />
-          <TableColumn prefWidth="248.0" text="Nome" />
-            <TableColumn prefWidth="570.0" text="Descrição" />
+          <TableColumn fx:id="nameColumn" prefWidth="312.0" text="Nome" />
+            <TableColumn fx:id="descriptionColumn" prefWidth="651.0" text="Descrição" />
         </columns>
       </TableView>
    </children>

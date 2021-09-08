@@ -5,8 +5,10 @@ import java.util.List;
 import common.DefaultEditor;
 import common.EditorCallback;
 import common.MaskedTextField;
+import db.managers.OccupationsManager;
 import entities.Artist;
 import entities.Occupation;
+import javafx.collections.FXCollections;
 import javafx.geometry.Insets;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
@@ -60,6 +62,16 @@ public class ArtistEditor extends DefaultEditor<Artist> {
       cbOccupation.setValue(source.getOccupation());
     }
   }
+
+  private void loadComboItems() {
+    try {
+      List<Occupation> occupations = OccupationsManager.getInstance().getAll();
+
+      cbOccupation.setItems(FXCollections.observableArrayList(occupations));
+    } catch (Exception e) {
+      handleException(e);
+    }
+}
   
   private void initComponents() {
     setTitle("Editor de Artista");
@@ -67,6 +79,7 @@ public class ArtistEditor extends DefaultEditor<Artist> {
 
     cbOccupation.setPrefWidth(300);
 
+    loadComboItems();
     setSource(source);
 
     grid.setPadding(new Insets(500));

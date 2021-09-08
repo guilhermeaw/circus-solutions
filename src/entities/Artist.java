@@ -2,15 +2,20 @@ package entities;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.GenericGenerator;
+
 @Entity
 @Table(name="artists")
 public class Artist {
   @Id
+  @GenericGenerator(name="incgenerator" , strategy="increment")
+  @GeneratedValue(generator="incgenerator")
   @Column(name="id", unique=true, nullable=false)
   private int id;
   

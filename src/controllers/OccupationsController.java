@@ -1,6 +1,8 @@
 package controllers;
 
+import java.net.URL;
 import java.util.List;
+import java.util.ResourceBundle;
 
 import common.EditorCallback;
 import db.managers.OccupationsManager;
@@ -11,13 +13,23 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import services.AlertService;
 import utils.ApplicationUtilities;
 
-public class OccupationsController {
+public class OccupationsController implements Initializable {
+    @FXML
+    private Button buttonAdd;
+
+    @FXML
+    private Button buttonEdit;
+
+    @FXML
+    private Button buttonDelete;
+
     @FXML
     private TableView<Occupation> occupationsTable;
    
@@ -29,6 +41,25 @@ public class OccupationsController {
 
     @FXML
     private Button buttonOccupations;
+
+    
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        refreshContent();
+
+        buttonEdit.setDisable(true);
+        buttonDelete.setDisable(true);
+    
+        occupationsTable.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+          if (newSelection != null) {
+            buttonEdit.setDisable(false);
+            buttonDelete.setDisable(false);
+          } else {
+            buttonEdit.setDisable(true);
+            buttonDelete.setDisable(true);
+          }
+        });   
+    }  
 
     public void refreshContent() {
         try {
@@ -100,5 +131,5 @@ public class OccupationsController {
         } else {
             AlertService.showWarning("É necessário selecionar um cargo");
         }
-    }   
+    } 
 }

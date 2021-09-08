@@ -28,7 +28,7 @@ public class Artist {
   @Column(name="phone", length=11)
   private String phone;
 
-  @ManyToOne(fetch=FetchType.LAZY)
+  @ManyToOne(fetch=FetchType.EAGER)
   @JoinColumn(name="ref_occupation", nullable=false)
   private Occupation occupation;
 

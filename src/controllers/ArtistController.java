@@ -8,6 +8,8 @@ import common.EditorCallback;
 import db.managers.ArtistManager;
 import editors.ArtistEditor;
 import entities.Artist;
+import formatters.CpfFormatter;
+import formatters.PhoneFormatter;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -69,8 +71,8 @@ public class ArtistController implements Initializable {
       ObservableList<Artist> artistsObservableList = FXCollections.observableArrayList(artists);
 
       nameColumn.setCellValueFactory(column -> new SimpleStringProperty(column.getValue().getName()));
-      phoneColumn.setCellValueFactory(column -> new SimpleStringProperty(column.getValue().getPhone()));
-      cpfColumn.setCellValueFactory(column -> new SimpleStringProperty(column.getValue().getCpf()));
+      phoneColumn.setCellValueFactory(column -> new SimpleStringProperty(PhoneFormatter.format(column.getValue().getPhone())));
+      cpfColumn.setCellValueFactory(column -> new SimpleStringProperty(CpfFormatter.format(column.getValue().getCpf())));
       occupationColumn.setCellValueFactory(column -> new SimpleStringProperty(column.getValue().getOccupation().getName()));
 
       artistsTable.setItems(artistsObservableList);

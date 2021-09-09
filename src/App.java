@@ -2,6 +2,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import utils.ApplicationUtilities;
@@ -24,6 +25,7 @@ public class App extends Application {
         Font.loadFont(getClass().getResourceAsStream("res/cuprum.ttf"), 14);
 
         primaryStage.setTitle("Circus Solution");
+        primaryStage.getIcons().add(new Image(getClass().getResourceAsStream("/res/images/logo.png")));
         primaryStage.setScene(tela);
         primaryStage.show();
     }

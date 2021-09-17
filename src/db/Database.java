@@ -6,6 +6,8 @@ import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 
+import utils.ApplicationUtilities;
+
 public class Database {
   private static Database instance;
 
@@ -44,6 +46,9 @@ public class Database {
       // The registry would be destroyed by the SessionFactory, but we had trouble building the SessionFactory
       // so destroy it manually.
       System.out.println("Não foi possível conectar-se ao banco de dados, registro destruído.");
+      System.out.println(e.getMessage());
+      
+      e.printStackTrace();
       StandardServiceRegistryBuilder.destroy( registry );
     }
   }

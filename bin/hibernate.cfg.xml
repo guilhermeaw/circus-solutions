@@ -16,7 +16,6 @@
 		<mapping class="entities.Artist" />
 		<mapping class="entities.Occupation" />
 		<mapping class="entities.User" />
-		<mapping class="entities.Occupation" />
 
 	</session-factory>
 </hibernate-configuration>

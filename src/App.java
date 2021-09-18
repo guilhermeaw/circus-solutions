@@ -15,15 +15,15 @@ public class App extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         ApplicationUtilities.getInstance().setPrimaryStage(primaryStage);
-        
+
         String location = "views/login.fxml";
         
         FXMLLoader loader = new FXMLLoader(getClass().getResource(location));
         Parent root = loader.load();
         Scene tela = new Scene(root);
-
+        
         Font.loadFont(getClass().getResourceAsStream("res/cuprum.ttf"), 14);
-
+        
         primaryStage.setTitle("Circus Solution");
         primaryStage.getIcons().add(new Image(getClass().getResourceAsStream("/res/images/logo.png")));
         primaryStage.setScene(tela);

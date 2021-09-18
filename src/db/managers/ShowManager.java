@@ -1,11 +1,12 @@
 package db.managers;
 
+import entities.City;
 import entities.Show;
 
 public class ShowManager extends DefaultManager<Show> {
   private static ShowManager instance;
 
-  private void ShowManager() {
+  private ShowManager() {
   }
 
   public static ShowManager getInstance() {
@@ -19,7 +20,9 @@ public class ShowManager extends DefaultManager<Show> {
   @Override
   public Show getById(Class<Show> class1, int id) {
       Show show = super.getById(class1, id);
-    //   show.setCity();
+      City city = CityManager.getInstance().getById(show.getCityId());
+      
+      show.setCity(city);
 
       return show;
   }

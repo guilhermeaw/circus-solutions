@@ -2,14 +2,14 @@ package entities;
 
 // Não utiliza o hibernate pois utilizará o arquivo 'states-cities.json' para consultas
 public class State {
+    private Long id;
     private String name;
-    private String initials;
 
     public State() {}
 
-    public State(String name, String initials) {
+    public State(String name, Long id) {
         this.name = name;
-        this.initials = initials;
+        this.id = id;
     }
 
     public String getName() {
@@ -20,11 +20,11 @@ public class State {
         this.name = name;
     }
 
-    public String getInitials() {
-        return initials;
+    public Long getId() {
+        return id;
     }
 
-    public void setInitials(String initials) {
-        this.initials = initials;
+    public void setId(Long id) {
+        this.id = id;
     }
 }

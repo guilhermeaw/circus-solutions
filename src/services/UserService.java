@@ -15,10 +15,10 @@ public class UserService {
     user.setLogin(login);
     user.setPassword(HashService.hash(password));
 
-    new UserManager().create(user);
+    UserManager.getInstance().create(user);
   }
 
   public static void updateUser(User user) throws Exception {
-    new UserManager().update(user);
+    UserManager.getInstance().update(user);
   }
 }

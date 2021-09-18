@@ -12,7 +12,7 @@ public class UserManager extends DefaultManager<User> {
   private static UserManager instance;
   private Database db = Database.getInstance();
 
-  private void UserManager() {
+  private UserManager() {
   }
 
   public static UserManager getInstance() {

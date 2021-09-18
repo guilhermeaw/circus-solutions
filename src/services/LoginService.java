@@ -15,7 +15,7 @@ public class LoginService {
         throw new Exception("É necessário preencher os campos de login e senha");
     }
 
-    User user = new UserManager().getByLoginAndPassword(login, HashService.hash(password));
+    User user = UserManager.getInstance().getByLoginAndPassword(login, HashService.hash(password));
 
     if (user != null) {
         ApplicationUtilities.getInstance().setActiveUser(user);

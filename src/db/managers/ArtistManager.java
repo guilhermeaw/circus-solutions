@@ -19,7 +19,7 @@ public class ArtistManager extends DefaultManager<Artist> {
     return instance;
   }
   
-  private void ArtistManager() {
+  private ArtistManager() {
   }
   
   public List<Artist> getAll() {

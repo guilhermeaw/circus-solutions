@@ -12,7 +12,7 @@ import utils.ApplicationUtilities;
 public class OccupationsManager extends DefaultManager<Occupation> {
   private static OccupationsManager instance;
 
-  private void OccupationsManager() {
+  private OccupationsManager() {
   }
 
   public static OccupationsManager getInstance() {

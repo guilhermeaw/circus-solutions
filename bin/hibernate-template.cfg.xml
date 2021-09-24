@@ -15,6 +15,7 @@
 
 		<mapping class="entities.Artist" />
 		<mapping class="entities.Occupation" />
+		<mapping class="entities.Attraction" />		
 		<mapping class="entities.User" />
 
 	</session-factory>

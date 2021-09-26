@@ -23,7 +23,7 @@
                         <Font name="System Bold" size="32.0" />
                      </font>
                   </Text>
-                  <HBox alignment="TOP_RIGHT" prefHeight="49.0" prefWidth="886.0" spacing="16.0" style="-fx-alignment: space-between;">
+                  <HBox alignment="TOP_RIGHT" prefHeight="49.0" prefWidth="886.0" spacing="16.0" >
                      <children>
                         <Button fx:id="buttonAdd" mnemonicParsing="false" onAction="#handleAddOccupation" prefHeight="49.0" prefWidth="122.0" style="-fx-font-weight: bold;" text="Adicionar">
                            <font>

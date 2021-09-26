@@ -1,11 +1,17 @@
 package db.managers;
 
+import java.lang.reflect.ParameterizedType;
+
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 import org.hibernate.Session;
 
 import db.Database;
 import utils.ApplicationUtilities;
 
 public abstract class DefaultManager<T> {
+  private static final Logger logger = LogManager.getLogger(DefaultManager.class.getName());
+  
   public void create(T value) {
     try {
       Database db = Database.getInstance();
@@ -13,6 +19,7 @@ public abstract class DefaultManager<T> {
   
       session.beginTransaction();
       session.save(value);
+      logger.info("Adicionando " + getGenericName());
       session.getTransaction().commit();
       session.close(); 
     } catch (Exception e) {
@@ -27,6 +34,7 @@ public abstract class DefaultManager<T> {
   
       session.beginTransaction();
       session.delete(value);
+      logger.info("Removendo " + getGenericName());
       session.getTransaction().commit();
       session.close(); 
     } catch (Exception e) {
@@ -59,6 +67,7 @@ public abstract class DefaultManager<T> {
   
       session.beginTransaction();
       session.update(value);
+      logger.info("Editando " + getGenericName());
       session.getTransaction().commit();
       session.close(); 
     } catch (Exception e) {
@@ -66,7 +75,15 @@ public abstract class DefaultManager<T> {
     }
   }
 
-  public void handleException(Exception e) {
+  protected void handleException(Exception e) {
     ApplicationUtilities.getInstance().handleException(e);
+  }
+
+  private String getGenericName() { 
+    return getGenericClass().getSimpleName();
+  }
+
+  private Class<T> getGenericClass() { 
+    return ((Class<T>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0]);
   }
 }

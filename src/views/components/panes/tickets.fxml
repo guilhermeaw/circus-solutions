@@ -23,6 +23,22 @@
                         <Font name="System Bold" size="32.0" />
                      </font>
                   </Text>
+                  <HBox alignment="TOP_RIGHT" prefHeight="49.0" prefWidth="886.0" spacing="16.0">
+                     <children>
+                        <Button fx:id="buttonEdit" mnemonicParsing="false" onAction="#handleEditTicketConfig" prefHeight="49.0" prefWidth="122.0" style="-fx-font-weight: bold;" text="Editar">
+                           <graphic>
+                              <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../../res/images/edit.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                     </children>
+                     <HBox.margin>
+                        <Insets right="24.0" />
+                     </HBox.margin>
+                  </HBox>
                </children>
                <padding>
                   <Insets bottom="16.0" left="16.0" right="16.0" top="16.0" />

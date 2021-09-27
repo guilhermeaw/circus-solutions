@@ -110,7 +110,7 @@ public class AttractionController implements Initializable {
                 }
             } ).open();
         } else {
-            AlertService.showWarning("É necessário selecionar um cargo");
+            AlertService.showWarning("É necessário selecionar uma atração");
         }
     }
 
@@ -119,7 +119,7 @@ public class AttractionController implements Initializable {
         Attraction selectedAttraction = attractionsTable.getSelectionModel().getSelectedItem();
 
         if (selectedAttraction != null) {
-            if (AlertService.showConfirmation("Tem certeza que deseja excluir o cargo " + selectedAttraction.getName() + "?")) {
+            if (AlertService.showConfirmation("Tem certeza que deseja excluir a atração " + selectedAttraction.getName() + "?")) {
                 try {
                     AttractionsManager.getInstance().delete(selectedAttraction);
 
@@ -129,7 +129,7 @@ public class AttractionController implements Initializable {
                 }
             }
         } else {
-            AlertService.showWarning("É necessário selecionar um cargo");
+            AlertService.showWarning("É necessário selecionar uma atração");
         }
     } 
 }

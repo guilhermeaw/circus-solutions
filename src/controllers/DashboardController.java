@@ -29,6 +29,9 @@ public class DashboardController implements Initializable {
     @FXML
     private Button attractionsButton;
 
+    @FXML
+    private Button ticketsButton;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
       loadDefaultPane();
@@ -41,7 +44,9 @@ public class DashboardController implements Initializable {
           loadPane("/views/components/panes/occupation.fxml");
       } else if (actionEvent.getSource() == attractionsButton) {
         loadPane("/views/components/panes/attraction.fxml");
-    }
+      } else if (actionEvent.getSource() == ticketsButton) {
+        loadPane("/views/components/panes/tickets.fxml");
+      }
   }
     
     @FXML

@@ -14,8 +14,9 @@
 		<property name="hbm2ddl.auto">update</property>
 
 		<mapping class="entities.Artist" />
+		<mapping class="entities.Attraction" />
 		<mapping class="entities.Occupation" />
-		<mapping class="entities.Attraction" />		
+		<mapping class="entities.TicketConfig" />
 		<mapping class="entities.User" />
 
 	</session-factory>

@@ -2,6 +2,8 @@ package utils;
 
 import entities.User;
 import javafx.stage.Stage;
+import services.AlertService;
+
 import java.util.List;
 
 public class ApplicationUtilities {
@@ -28,6 +30,7 @@ public class ApplicationUtilities {
 
   public void handleException(Exception e) {
     e.printStackTrace();
+    AlertService.showError(e.getMessage());
   }
 
   public User getActiveUser() {

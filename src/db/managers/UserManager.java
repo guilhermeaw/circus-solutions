@@ -1,7 +1,5 @@
 package db.managers;
 
-import java.util.List;
-
 import org.hibernate.Session;
 
 import db.Database;
@@ -42,10 +40,5 @@ public class UserManager extends DefaultManager<User> {
     }
         
     return user;
-  }
-
-  public List<User> getAll() {
-    // TODO Auto-generated method stub
-    return null;
   }
 }

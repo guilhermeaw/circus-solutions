@@ -6,6 +6,8 @@ import javafx.event.EventHandler;
 import javafx.scene.control.ButtonBar;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Dialog;
+import javafx.scene.image.Image;
+import javafx.stage.Stage;
 import javafx.util.Callback;
 import services.AlertService;
 import utils.ApplicationUtilities;
@@ -59,9 +61,14 @@ public abstract class DefaultEditor<T> extends Dialog<T> {
         }
     }
 
+    protected void setIcon(Image icon) {
+        ((Stage) getDialogPane().getScene().getWindow()).getIcons().add(icon);
+    }
+
     private void initComponents() {
         setTitle( "Editor" );
         setHeaderText( "Editor de Items" );
+        setIcon(new Image(getClass().getResourceAsStream("/res/images/edit.png")));
         setResizable( false );
 
         getDialogPane().getButtonTypes().addAll( cancelBtn, saveBtn );

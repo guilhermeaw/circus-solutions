@@ -113,7 +113,7 @@ public class ArtistEditor extends DefaultEditor<Artist> {
   private TextField tfName = new TextField();
 
   private Label lbOccupation = new Label("Cargo: *");
-  private ComboBox<Occupation> cbOccupation = new ComboBox();
+  private ComboBox<Occupation> cbOccupation = new ComboBox<Occupation>();
 
   private Label lbPhone = new Label("Telefone: *");
   private MaskedTextField tfPhone = new MaskedTextField("(##) #####-####");

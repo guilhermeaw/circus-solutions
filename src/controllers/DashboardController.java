@@ -89,7 +89,9 @@ public class DashboardController implements Initializable {
       boolean hasActiveShow = ShowService.getCurrentActiveShow() != null;
       
       // ticketOfficeButton.setDisable(!hasActiveShow);
-      String tooltipText = hasActiveShow ? "" : "Não há nenhum espetáculo com bilheteria aberta";
-      ticketOfficeWrapper.setTooltip(new Tooltip(tooltipText));
+      if (!hasActiveShow) {
+        String tooltipText = "Não há nenhum espetáculo com bilheteria aberta";
+        ticketOfficeWrapper.setTooltip(new Tooltip(tooltipText));
+      }
     }
 }

@@ -4,6 +4,8 @@ import entities.User;
 import javafx.stage.Stage;
 import services.AlertService;
 
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.util.List;
 
 public class ApplicationUtilities {
@@ -29,8 +31,14 @@ public class ApplicationUtilities {
   }
 
   public void handleException(Exception e) {
+    StringWriter sw = new StringWriter();
+    e.printStackTrace(new PrintWriter(sw));
+    String exceptionAsString = sw.toString();
+
+    String errorMessage = e.getMessage() + "\n\n" + exceptionAsString;
+
+    AlertService.showError(errorMessage);
     e.printStackTrace();
-    AlertService.showError(e.getMessage());
   }
 
   public User getActiveUser() {

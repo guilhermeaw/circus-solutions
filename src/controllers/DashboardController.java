@@ -9,8 +9,11 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
+import javafx.scene.control.SplitPane;
+import javafx.scene.control.Tooltip;
 import javafx.scene.layout.StackPane;
 import services.LoginService;
+import services.ShowService;
 import utils.ApplicationUtilities;
 
 public class DashboardController implements Initializable {
@@ -35,9 +38,16 @@ public class DashboardController implements Initializable {
     @FXML
     private Button showsButton;
 
+    @FXML
+    private Button ticketOfficeButton;
+
+    @FXML
+    private SplitPane ticketOfficeWrapper;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
       loadDefaultPane();
+      loadTicketOfficeButton();
     }
 
     public void handleChangePane(ActionEvent actionEvent) {
@@ -51,6 +61,8 @@ public class DashboardController implements Initializable {
         loadPane("/views/components/panes/tickets.fxml");
       } else if (actionEvent.getSource() == showsButton) {
         loadPane("/views/components/panes/show.fxml");
+      } else if (actionEvent.getSource() == ticketOfficeButton) {
+        loadPane("/views/components/panes/ticketOffice.fxml");
       }
   }
     
@@ -71,5 +83,13 @@ public class DashboardController implements Initializable {
       } catch (Exception e) {
           ApplicationUtilities.getInstance().handleException(e);
       }
+    }
+
+    private void loadTicketOfficeButton() {
+      boolean hasActiveShow = ShowService.getCurrentActiveShow() != null;
+      
+      // ticketOfficeButton.setDisable(!hasActiveShow);
+      String tooltipText = hasActiveShow ? "" : "Não há nenhum espetáculo com bilheteria aberta";
+      ticketOfficeWrapper.setTooltip(new Tooltip(tooltipText));
     }
 }

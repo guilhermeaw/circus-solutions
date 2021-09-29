@@ -43,6 +43,10 @@ public class Show {
         return city;
     }
 
+    public City getCity() {
+        return city;
+    }
+
     public void setCity(City city) {
         this.city = city;
     }

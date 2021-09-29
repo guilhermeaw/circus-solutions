@@ -35,7 +35,7 @@ public class ShowEditor extends DefaultEditor<Show> {
 
     @Override
     protected void obtainInput() { 
-        source.setCityId(cbCity.getValue().getId());
+        //source.setCityId(cbCity.getValue().getId());
         source.setCapacity(Integer.parseInt(textCapacity.getText()));
         source.setDate(DateUtils.getDateByLocalDate(textDate.getValue()));
         source.setAuthor(ApplicationUtilities.getInstance().getActiveUser());

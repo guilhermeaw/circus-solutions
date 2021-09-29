@@ -13,6 +13,8 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
 
+import db.managers.CityManager;
+
 @Entity
 @Table(name="shows")
 public class Show {
@@ -21,12 +23,17 @@ public class Show {
     @GeneratedValue(generator="incgenerator")
     @Column(name="id", unique=true, nullable=false)
     private int id;
+
+    @Column(name="capacity", unique=true, nullable=false)
     private int capacity;
-    private int cityId;
-    private Date date;
     
-    // @ManyToOne(targetEntity = City.class)
-    // @JoinColumn(name = "ref_city") 
+    @Column(name="cityId", unique=true, nullable=false)
+    private int cityId;
+
+    @Column(name="date", unique=true, nullable=false)
+    private Date date;
+
+    // @Column(name="city", unique=true, nullable=false)
     // private City city;
     
     @ManyToOne(fetch=FetchType.EAGER)

@@ -9,6 +9,7 @@ import org.json.simple.parser.JSONParser;
 import entities.State;
 import utils.ApplicationUtilities;
 
+// Este manager não estende o DefaultManager pois não persiste em banco
 public class StateManager {
   private static StateManager instance;
 

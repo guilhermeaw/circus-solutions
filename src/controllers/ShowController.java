@@ -44,6 +44,9 @@ public class ShowController implements Initializable {
     private TableColumn<Show, String> cityColumn;
 
     @FXML
+    private TableColumn<Show, String> stateColumn;
+
+    @FXML
     private TableColumn<Show, String> authorColumn;
 
     @FXML

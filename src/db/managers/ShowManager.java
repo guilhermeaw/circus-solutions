@@ -24,15 +24,15 @@ public class ShowManager extends DefaultManager<Show> {
     return instance;
   }
 
-  @Override
-  public Show getById(Class<Show> class1, int id) {
-      Show show = super.getById(class1, id);
-      City city = CityManager.getInstance().getById(show.getCityId());
+  // @Override
+  // public Show getById(Class<Show> class1, int id) {
+  //     Show show = super.getById(class1, id);
+  //     City city = CityManager.getInstance().getById(show.getCityId());
       
-      show.setCity(city);
+  //     show.setCity(city);
 
-      return show;
-  }
+  //     return show;
+  // }
 
   public List<Show> getAll() {
     List showList = new ArrayList();

@@ -74,10 +74,10 @@ public class ShowController implements Initializable {
 
             ObservableList<Show> showObservableList = FXCollections.observableArrayList(shows);          
 
-            //dateColumn.setCellValueFactory(column -> new SimpleStringProperty(DateFormatter.format(column.getValue().getEnterDate())));
-            //capacityColumn.setCellValueFactory(column -> new SimpleStringProperty(column.getValue().getCapacity()));
-            cityColumn.setCellValueFactory(column -> new SimpleStringProperty(column.getValue().getCity().getName()));
-            //authorColumn.setCellValueFactory(column -> new SimpleStringProperty(column.getValue().getAuthor().getName()));
+            dateColumn.setCellValueFactory(column -> new SimpleStringProperty(DateFormatter.format(column.getValue().getDate())));
+            capacityColumn.setCellValueFactory(column -> new SimpleStringProperty(String.valueOf(column.getValue().getCapacity())));
+            //cityColumn.setCellValueFactory(column -> new SimpleStringProperty(column.getValue().getCity().getName()));
+            authorColumn.setCellValueFactory(column -> new SimpleStringProperty(column.getValue().getAuthor().getName()));
 
             showsTable.setItems(showObservableList);
         } catch (Exception e) {

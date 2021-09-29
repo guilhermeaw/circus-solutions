@@ -3,6 +3,9 @@ package entities;
 import java.util.Date;
 
 import javax.persistence.Column;
+import javax.persistence.FetchType;
+import javax.persistence.ManyToOne;
+import javax.persistence.JoinColumn;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -20,17 +23,23 @@ public class Show {
     private int id;
     private int capacity;
     private int cityId;
-    private City city;
     private Date date;
+    
+    // @ManyToOne(targetEntity = City.class)
+    // @JoinColumn(name = "ref_city") 
+    // private City city;
+    
+    @ManyToOne(fetch=FetchType.EAGER)
+    @JoinColumn(name="ref_users", nullable=false)
     private User author;
 
-    public City getCity() {
-        return city;
-    }
+    // public City getCity() {
+    //     return city;
+    // }
 
-    public void setCity(City city) {
-        this.city = city;
-    }
+    // public void setCity(City city) {
+    //     this.city = city;
+    // }
 
     public int getId() {
         return id;

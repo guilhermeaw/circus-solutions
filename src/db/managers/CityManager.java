@@ -49,7 +49,7 @@ public class CityManager {
 
     for (Object city : cities) {
       JSONObject cityObject = (JSONObject) city;
-      Long cityId = (Long) (cityObject.get("id"));
+      int cityId = (int) (cityObject.get("id"));
   
       if (cityId == id) {
         String name = (String) (cityObject.get("name"));

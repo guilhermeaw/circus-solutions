@@ -3,6 +3,8 @@ package db.managers;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.NoResultException;
+
 import entities.City;
 import entities.Show;
 
@@ -32,6 +34,34 @@ public class ShowManager extends DefaultManager<Show> {
       show.setCity(city);
 
       return show;
+  }
+
+  public Show getActiveShow() {
+    Show value = null;
+    
+    try {
+      Database db = Database.getInstance();
+      Session session = db.openSession();
+  
+      session.beginTransaction();
+      value = session.createQuery("from Show s where s.isShowActive = :active", Show.class)
+        .setParameter("active", true)
+        .getSingleResult();
+
+      if (value != null) {
+        City city = CityManager.getInstance().getById(value.getCityId());
+        value.setCity(city);
+      }
+
+      session.getTransaction().commit();
+      session.close(); 
+    } catch (NoResultException nre) {
+      // Ignora, pois aceitamos um null como retorno
+    } catch (Exception e) {
+      handleException(e);
+    }  
+
+    return value;
   }
 
   public List<Show> getAll() {

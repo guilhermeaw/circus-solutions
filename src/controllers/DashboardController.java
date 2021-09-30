@@ -10,7 +10,9 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.layout.StackPane;
+import services.AlertService;
 import services.LoginService;
+import services.ShowService;
 import utils.ApplicationUtilities;
 
 public class DashboardController implements Initializable {
@@ -35,6 +37,9 @@ public class DashboardController implements Initializable {
     @FXML
     private Button showsButton;
 
+    @FXML
+    private Button ticketOfficeButton;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
       loadDefaultPane();
@@ -42,7 +47,7 @@ public class DashboardController implements Initializable {
 
     public void handleChangePane(ActionEvent actionEvent) {
       if (actionEvent.getSource() == artistsButton) {
-          loadPane("/views/components/panes/artist.fxml");
+        loadPane("/views/components/panes/artist.fxml");
       } else if (actionEvent.getSource() == occupationsButton) {
           loadPane("/views/components/panes/occupation.fxml");
       } else if (actionEvent.getSource() == attractionsButton) {
@@ -51,6 +56,15 @@ public class DashboardController implements Initializable {
         loadPane("/views/components/panes/tickets.fxml");
       } else if (actionEvent.getSource() == showsButton) {
         loadPane("/views/components/panes/show.fxml");
+      } else if (actionEvent.getSource() == ticketOfficeButton) {
+        boolean hasActiveShow = ShowService.getCurrentActiveShow() != null;
+        
+        if (!hasActiveShow) {
+          AlertService.showWarning("Não há nenhum show ativo na bilheteria");
+          return;
+        }
+
+        loadPane("/views/components/panes/ticketOffice.fxml");
       }
   }
     

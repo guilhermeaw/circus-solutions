@@ -6,6 +6,7 @@ import java.util.Date;
 import java.util.ResourceBundle;
 
 import db.managers.TicketConfigManager;
+import entities.Show;
 import entities.TicketConfig;
 import formatters.CurrencyFormatter;
 import formatters.DateFormatter;
@@ -17,6 +18,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import services.AlertService;
+import services.ShowService;
 import utils.ApplicationUtilities;
 
 public class TicketController implements Initializable {
@@ -61,6 +64,13 @@ public class TicketController implements Initializable {
 
     @FXML
     void handleEditTicketConfig(ActionEvent event) {
+        Show currentActiveShow = ShowService.getCurrentActiveShow();
+
+        if (currentActiveShow != null) {
+            AlertService.showWarning("Não é possível alterar o valor do ingresso quando há espetáculos em atividade. Para continuar, primeiro encerre as vendas na bilheteria");
+            return;
+        }
+
         buttonConfirm.setDisable(false);
         buttonCancel.setDisable(false);
 

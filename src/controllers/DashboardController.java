@@ -9,9 +9,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
-import javafx.scene.control.SplitPane;
-import javafx.scene.control.Tooltip;
 import javafx.scene.layout.StackPane;
+import services.AlertService;
 import services.LoginService;
 import services.ShowService;
 import utils.ApplicationUtilities;
@@ -41,18 +40,14 @@ public class DashboardController implements Initializable {
     @FXML
     private Button ticketOfficeButton;
 
-    @FXML
-    private SplitPane ticketOfficeWrapper;
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
       loadDefaultPane();
-      loadTicketOfficeButton();
     }
 
     public void handleChangePane(ActionEvent actionEvent) {
       if (actionEvent.getSource() == artistsButton) {
-          loadPane("/views/components/panes/artist.fxml");
+        loadPane("/views/components/panes/artist.fxml");
       } else if (actionEvent.getSource() == occupationsButton) {
           loadPane("/views/components/panes/occupation.fxml");
       } else if (actionEvent.getSource() == attractionsButton) {
@@ -62,6 +57,13 @@ public class DashboardController implements Initializable {
       } else if (actionEvent.getSource() == showsButton) {
         loadPane("/views/components/panes/show.fxml");
       } else if (actionEvent.getSource() == ticketOfficeButton) {
+        boolean hasActiveShow = ShowService.getCurrentActiveShow() != null;
+        
+        if (!hasActiveShow) {
+          AlertService.showWarning("Não há nenhum show ativo na bilheteria");
+          return;
+        }
+
         loadPane("/views/components/panes/ticketOffice.fxml");
       }
   }
@@ -82,16 +84,6 @@ public class DashboardController implements Initializable {
           dashboardStackPane.getChildren().setAll(pane);
       } catch (Exception e) {
           ApplicationUtilities.getInstance().handleException(e);
-      }
-    }
-
-    private void loadTicketOfficeButton() {
-      boolean hasActiveShow = ShowService.getCurrentActiveShow() != null;
-      
-      // ticketOfficeButton.setDisable(!hasActiveShow);
-      if (!hasActiveShow) {
-        String tooltipText = "Não há nenhum espetáculo com bilheteria aberta";
-        ticketOfficeWrapper.setTooltip(new Tooltip(tooltipText));
       }
     }
 }

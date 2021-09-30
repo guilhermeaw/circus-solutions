@@ -1,8 +1,11 @@
 package controllers;
 
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.ResourceBundle;
+
+import org.controlsfx.control.Notifications;
 
 import common.EditorCallback;
 import db.managers.ShowManager;
@@ -15,11 +18,15 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.util.Duration;
 import services.AlertService;
+import services.ShowService;
 import utils.ApplicationUtilities;
+import utils.DateUtils;
 
 public class ShowController implements Initializable {
     @FXML
@@ -30,6 +37,9 @@ public class ShowController implements Initializable {
 
     @FXML
     private Button buttonDelete;
+
+    @FXML
+    private Button buttonStartSales;
 
     @FXML
     private TableView<Show> showsTable;
@@ -49,24 +59,23 @@ public class ShowController implements Initializable {
     @FXML
     private TableColumn<Show, String> authorColumn;
 
-    @FXML
-    private Button buttonShows;
-
-    
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         refreshContent();
 
         buttonEdit.setDisable(true);
         buttonDelete.setDisable(true);
-    
+        buttonStartSales.setDisable(true);
+
         showsTable.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
           if (newSelection != null) {
             buttonEdit.setDisable(false);
             buttonDelete.setDisable(false);
+            buttonStartSales.setDisable(false);
           } else {
             buttonEdit.setDisable(true);
             buttonDelete.setDisable(true);
+            buttonStartSales.setDisable(true);
           }
         });   
     }  
@@ -144,4 +153,35 @@ public class ShowController implements Initializable {
             AlertService.showWarning("É necessário selecionar um show");
         }
     } 
+
+    @FXML
+    public void handleStartSales(ActionEvent event) {
+        Show selectedShow = showsTable.getSelectionModel().getSelectedItem();
+        Show currentActiveShow = ShowService.getCurrentActiveShow();
+
+        if (currentActiveShow != null) {
+            if (currentActiveShow.getId() != selectedShow.getId()) {
+                AlertService.showWarning("Já existe um show com as vendas ativas. É necessário primeiramente encerrar as vendas do show ativo, através da bilheteria");
+                return;
+            } 
+
+            AlertService.showWarning("O show já está com as vendas ativas na bilheteria");
+        } else {
+            if (selectedShow.getDate().before(DateUtils.getDateByLocalDate(LocalDate.now()))) {
+                AlertService.showWarning("A data do show já passou, não é possível iniciar as vendas");
+                return;
+            }
+            
+            selectedShow.setIsShowActive(true);
+            ShowManager.getInstance().update(selectedShow);
+
+            Notifications activeSalesNotification = Notifications.create()
+                                    .title("Espetáculo - Circus Solution")
+                                    .text("Vendas abertas para o show de " + selectedShow.toString() )
+                                    .position( Pos.BOTTOM_RIGHT )
+                                    .hideAfter( Duration.seconds( 10 ) );
+
+            activeSalesNotification.show();
+        }
+    }
 }

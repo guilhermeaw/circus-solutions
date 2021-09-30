@@ -1,11 +1,10 @@
 package services;
 
+import db.managers.ShowManager;
 import entities.Show;
 
 public class ShowService {
   public static Show getCurrentActiveShow() {
-    // TODO
-    /*Deve retornar um show ativo*/
-    return null;
+    return ShowManager.getInstance().getActiveShow();
   }
 }

@@ -79,7 +79,7 @@ public class ShowController implements Initializable {
 
             dateColumn.setCellValueFactory(column -> new SimpleStringProperty(DateFormatter.format(column.getValue().getDate())));
             capacityColumn.setCellValueFactory(column -> new SimpleStringProperty(String.valueOf(column.getValue().getCapacity())));
-            //cityColumn.setCellValueFactory(column -> new SimpleStringProperty(column.getValue().getCity().getName()));
+            cityColumn.setCellValueFactory(column -> new SimpleStringProperty(column.getValue().getCity().getName()));
             authorColumn.setCellValueFactory(column -> new SimpleStringProperty(column.getValue().getAuthor().getName()));
 
             showsTable.setItems(showObservableList);

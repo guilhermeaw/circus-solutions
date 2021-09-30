@@ -24,18 +24,18 @@ public class ShowManager extends DefaultManager<Show> {
     return instance;
   }
 
-  // @Override
-  // public Show getById(Class<Show> class1, int id) {
-  //     Show show = super.getById(class1, id);
-  //     City city = CityManager.getInstance().getById(show.getCityId());
+  @Override
+  public Show getById(Class<Show> class1, int id) {
+      Show show = super.getById(class1, id);
+      City city = CityManager.getInstance().getById(show.getCityId());
       
-  //     show.setCity(city);
+      show.setCity(city);
 
-  //     return show;
-  // }
+      return show;
+  }
 
   public List<Show> getAll() {
-    List showList = new ArrayList();
+    List<Show> showList = new ArrayList<Show>();
     
     try {
       Database db = Database.getInstance();
@@ -43,6 +43,11 @@ public class ShowManager extends DefaultManager<Show> {
       
       session.beginTransaction();
       showList = session.createQuery("FROM Show").list();
+
+      for (Show show : showList) {
+        show.setCity(CityManager.getInstance().getById(show.getCityId()));
+      }
+      
       session.getTransaction().commit();
       session.close();
 

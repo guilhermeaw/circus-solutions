@@ -1,6 +1,10 @@
 package db.managers;
 
 import java.io.FileReader;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -24,39 +28,73 @@ public class StateManager {
     return instance;
   }
 
-  public State getById(int id) {
-    State state = new State();
-
-    try {
-      JSONObject citiesStates;
-		  JSONParser parser = new JSONParser();
-      
-      FileReader fileReader = new FileReader(getClass().getResource("/res/cities-states.json").getFile());
-
-      citiesStates = (JSONObject) parser.parse(fileReader);
-      JSONArray cities = (JSONArray) citiesStates.get("cities");
-
-      state = getStateById(cities, id);
-    } catch (Exception e) {
-      ApplicationUtilities.getInstance().handleException(e);
-    }
-    
-    return state;
+  public State getById(Long id) {
+    return getStateByIdFromJson(id);
   }
+  
+  public List<State> getAll() {
+    List<State> states = getStatesFromJson();
 
-  private State getStateById(JSONArray cities, int id) {
+    Collections.sort(states, new Comparator<State>() {
+      @Override
+      public int compare(State o1, State o2) {
+        return o1.getName().compareTo(o2.getName());
+      }
+    });
+    
+    return states;
+  }
+  
+  private State getStateByIdFromJson(Long id) {
     State result = null;
 
-    for (Object State : cities) {
-      JSONObject StateObject = (JSONObject) State;
+    JSONArray jsonStates = getJsonArrayOfStates();
+    
+    for (Object state : jsonStates) {
+      JSONObject StateObject = (JSONObject) state;
       Long stateId = (Long) (StateObject.get("id"));
   
-      if (stateId == id) {
+      if (stateId.equals(id)) {
         String name = (String) (StateObject.get("name"));
         
         result = new State(name, stateId);
         break;
       }
+    }
+    
+    return result;
+  }
+  
+  private List<State> getStatesFromJson() {
+    List<State> result = new ArrayList<State>();
+    
+    JSONArray jsonStates = getJsonArrayOfStates();
+    
+    for (Object state : jsonStates) {
+      JSONObject stateObject = (JSONObject) state;
+      
+      String name = (String) (stateObject.get("name"));
+      Long stateId = (Long) (stateObject.get("id"));
+      
+      result.add(new State(name, stateId));
+    }
+    
+    return result;
+  }
+
+  private JSONArray getJsonArrayOfStates() {
+    JSONArray result = new JSONArray();
+
+    try {
+      JSONObject citiesStates;
+      JSONParser parser = new JSONParser();
+      
+      FileReader fileReader = new FileReader(getClass().getResource("/res/cities-states.json").getFile());
+
+      citiesStates = (JSONObject) parser.parse(fileReader);
+      result = (JSONArray) citiesStates.get("states");
+    } catch (Exception e) {
+      ApplicationUtilities.getInstance().handleException(e);
     }
     
     return result;

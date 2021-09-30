@@ -1,6 +1,6 @@
 package entities;
 
-import java.util.Date;
+import java.sql.Date;
 
 import javax.persistence.Column;
 import javax.persistence.FetchType;
@@ -10,10 +10,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.hibernate.annotations.GenericGenerator;
-
-import db.managers.CityManager;
 
 @Entity
 @Table(name="shows")
@@ -27,26 +26,26 @@ public class Show {
     @Column(name="capacity", unique=true, nullable=false)
     private int capacity;
     
-    @Column(name="cityId", unique=true, nullable=false)
-    private int cityId;
+    @Column(name="ref_city", unique=true, nullable=false)
+    private Long cityId;
 
     @Column(name="date", unique=true, nullable=false)
     private Date date;
 
-    // @Column(name="city", unique=true, nullable=false)
-    // private City city;
+    @Transient
+    private City city;
     
     @ManyToOne(fetch=FetchType.EAGER)
     @JoinColumn(name="ref_users", nullable=false)
     private User author;
 
-    // public City getCity() {
-    //     return city;
-    // }
+    public City getCity() {
+        return city;
+    }
 
-    // public void setCity(City city) {
-    //     this.city = city;
-    // }
+    public void setCity(City city) {
+        this.city = city;
+    }
 
     public int getId() {
         return id;
@@ -64,11 +63,11 @@ public class Show {
         this.capacity = capacity;
     }
 
-    public int getCityId() {
+    public Long getCityId() {
         return cityId;
     }
 
-    public void setCityId(int cityId) {
+    public void setCityId(Long cityId) {
         this.cityId = cityId;
     }
 

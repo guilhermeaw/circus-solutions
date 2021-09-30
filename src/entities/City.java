@@ -37,4 +37,9 @@ public class City {
     public void setStateId(Long stateId) {
         this.stateId = stateId;
     }
+
+    @Override
+    public String toString() {
+        return name;
+    }
 }

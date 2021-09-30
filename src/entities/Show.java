@@ -1,12 +1,16 @@
 package entities;
 
-import java.util.Date;
+import java.sql.Date;
 
 import javax.persistence.Column;
+import javax.persistence.FetchType;
+import javax.persistence.ManyToOne;
+import javax.persistence.JoinColumn;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.hibernate.annotations.GenericGenerator;
 
@@ -18,10 +22,21 @@ public class Show {
     @GeneratedValue(generator="incgenerator")
     @Column(name="id", unique=true, nullable=false)
     private int id;
+
+    @Column(name="capacity", unique=true, nullable=false)
     private int capacity;
-    private int cityId;
-    private City city;
+    
+    @Column(name="ref_city", unique=true, nullable=false)
+    private Long cityId;
+
+    @Column(name="date", unique=true, nullable=false)
     private Date date;
+
+    @Transient
+    private City city;
+    
+    @ManyToOne(fetch=FetchType.EAGER)
+    @JoinColumn(name="ref_users", nullable=false)
     private User author;
 
     public City getCity() {
@@ -48,11 +63,11 @@ public class Show {
         this.capacity = capacity;
     }
 
-    public int getCityId() {
+    public Long getCityId() {
         return cityId;
     }
 
-    public void setCityId(int cityId) {
+    public void setCityId(Long cityId) {
         this.cityId = cityId;
     }
 

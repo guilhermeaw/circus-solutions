@@ -17,7 +17,7 @@ public class Occupation {
   @Column(name="id", unique=true, nullable=false)
   private int id;
   
-  @Column(name="name", nullable=false, length=200)
+  @Column(name="name", nullable=false, unique=true, length=200)
   private String name;
 
   @Column(name="description", nullable=false, length=500)

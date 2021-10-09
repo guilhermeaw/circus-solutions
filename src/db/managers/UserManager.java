@@ -31,10 +31,10 @@ public class UserManager extends DefaultManager<User> {
       user = session.createQuery("from User u where u.login = :login and u.password = :password", User.class)
         .setParameter("login", login)
         .setParameter("password", password)
-        .getSingleResult();
+        .uniqueResult();
         
       session.getTransaction().commit();
-      session.close(); 
+      session.close();
     } catch (Exception e) {
       ApplicationUtilities.getInstance().handleException(e);
     }

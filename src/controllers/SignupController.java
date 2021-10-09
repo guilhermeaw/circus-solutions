@@ -42,7 +42,7 @@ public class SignupController {
             String name = fieldName.getText();
             String password = fieldPassword.getText();
 
-            List<String> errors = new ArrayList();
+            List<String> errors = new ArrayList<String>();
 
             validateFields(errors);
 

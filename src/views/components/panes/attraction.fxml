@@ -12,7 +12,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane minHeight="-Infinity" minWidth="-Infinity" styleClass="pane" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AttractionController">
+<Pane minHeight="-Infinity" minWidth="-Infinity" prefHeight="638.0" prefWidth="986.0" styleClass="pane" stylesheets="@../../styles/default.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AttractionController">
    <children>
       <VBox prefHeight="638.0" prefWidth="986.0">
          <children>
@@ -23,7 +23,7 @@
                         <Font name="System Bold" size="32.0" />
                      </font>
                   </Text>
-                  <HBox alignment="TOP_RIGHT" prefHeight="49.0" prefWidth="886.0" spacing="16.0" >
+                  <HBox alignment="TOP_RIGHT" prefHeight="49.0" prefWidth="886.0" spacing="16.0">
                      <children>
                         <Button fx:id="buttonAdd" mnemonicParsing="false" onAction="#handleAddAttraction" prefHeight="49.0" prefWidth="122.0" style="-fx-font-weight: bold;" text="Adicionar">
                            <font>

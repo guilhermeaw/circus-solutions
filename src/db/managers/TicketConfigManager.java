@@ -32,12 +32,10 @@ public class TicketConfigManager extends DefaultManager<TicketConfig> {
       session.beginTransaction();
 
       ticketConfig = session.createQuery("from TicketConfig tc where tc.createdDate in (select max(tc2.createdDate) from TicketConfig tc2)", TicketConfig.class)
-        .getSingleResult();
+        .uniqueResult();
         
       session.getTransaction().commit();
       session.close(); 
-    } catch (NoResultException nre) {
-      // Ignora, pois aceitamos um null como retorno
     } catch (Exception e) {
       ApplicationUtilities.getInstance().handleException(e);
     }

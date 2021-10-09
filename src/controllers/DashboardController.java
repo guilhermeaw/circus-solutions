@@ -3,6 +3,8 @@ package controllers;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import entities.Operation;
+import entities.Pane;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -12,6 +14,7 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.StackPane;
 import services.AlertService;
 import services.LoginService;
+import services.PermissionService;
 import services.ShowService;
 import utils.ApplicationUtilities;
 
@@ -42,14 +45,14 @@ public class DashboardController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-      loadDefaultPane();
+      loadViewPermissions();
     }
 
     public void handleChangePane(ActionEvent actionEvent) {
       if (actionEvent.getSource() == artistsButton) {
         loadPane("/views/components/panes/artist.fxml");
       } else if (actionEvent.getSource() == occupationsButton) {
-          loadPane("/views/components/panes/occupation.fxml");
+        loadPane("/views/components/panes/occupation.fxml");
       } else if (actionEvent.getSource() == attractionsButton) {
         loadPane("/views/components/panes/attraction.fxml");
       } else if (actionEvent.getSource() == ticketsButton) {
@@ -73,10 +76,6 @@ public class DashboardController implements Initializable {
       LoginService.doLogout();
     }
 
-    private void loadDefaultPane() {
-      loadPane("/views/components/panes/artist.fxml");
-    }
-
     private void loadPane(String paneSrc) {
       try {
           Parent pane = FXMLLoader.load(getClass().getResource(paneSrc));
@@ -85,5 +84,21 @@ public class DashboardController implements Initializable {
       } catch (Exception e) {
           ApplicationUtilities.getInstance().handleException(e);
       }
+    }
+
+    private void loadViewPermissions() {
+      boolean canAccessArtistsPane = PermissionService.hasAccess(Operation.VIEW, Pane.ARTISTS);
+      boolean canAccessOccupationsPane = PermissionService.hasAccess(Operation.VIEW, Pane.OCCUPATIONS);
+      boolean canAccessAttractionsPane = PermissionService.hasAccess(Operation.VIEW, Pane.ATTRACTIONS);
+      boolean canAccessTicketsPane = PermissionService.hasAccess(Operation.VIEW, Pane.TICKETS);
+      boolean canAccessShowsPane = PermissionService.hasAccess(Operation.VIEW, Pane.SHOWS);
+      boolean canAccessTicketOfficePane = PermissionService.hasAccess(Operation.VIEW, Pane.TICKET_OFFICE);
+      
+      artistsButton.setDisable(!canAccessArtistsPane);
+      occupationsButton.setDisable(!canAccessOccupationsPane);
+      attractionsButton.setDisable(!canAccessAttractionsPane);
+      ticketsButton.setDisable(!canAccessTicketsPane);
+      showsButton.setDisable(!canAccessShowsPane);
+      ticketOfficeButton.setDisable(!canAccessTicketOfficePane);
     }
 }

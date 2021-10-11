@@ -31,9 +31,9 @@
                 <permission access='false'>Tickets.modify</permission>
                 <permission access='false'>Tickets.delete</permission>
                 <!--permissions Users-->
-                <permission access='true'>Tickets.view</permission>
-                <permission access='false'>Tickets.modify</permission>
-                <permission access='false'>Tickets.delete</permission>
+                <permission access='true'>Users.view</permission>
+                <permission access='false'>Users.modify</permission>
+                <permission access='false'>Users.delete</permission>
 	</role>
 	<role name='Gerente'>
                 <!--permissions Artists-->
@@ -67,9 +67,9 @@
                 <permission access='false'>Tickets.modify</permission>
                 <permission access='false'>Tickets.delete</permission>
                 <!--permissions Users-->
-                <permission access='true'>Tickets.view</permission>
-                <permission access='true'>Tickets.modify</permission>
-                <permission access='true'>Tickets.delete</permission>
+                <permission access='true'>Users.view</permission>
+                <permission access='true'>Users.modify</permission>
+                <permission access='true'>Users.delete</permission>
 	</role>
 	<role name='Administrador'>
                 <!--permissions Artists-->
@@ -103,8 +103,8 @@
                 <permission access='false'>Tickets.modify</permission>
                 <permission access='false'>Tickets.delete</permission>
                 <!--permissions Users-->
-                <permission access='true'>Tickets.view</permission>
-                <permission access='true'>Tickets.modify</permission>
-                <permission access='true'>Tickets.delete</permission>
+                <permission access='true'>Users.view</permission>
+                <permission access='true'>Users.modify</permission>
+                <permission access='true'>Users.delete</permission>
 	</role>
 </permissions>

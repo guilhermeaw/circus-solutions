@@ -43,6 +43,9 @@ public class DashboardController implements Initializable {
     @FXML
     private Button ticketOfficeButton;
 
+    @FXML
+    private Button usersButton;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
       loadViewPermissions();
@@ -68,6 +71,8 @@ public class DashboardController implements Initializable {
         }
 
         loadPane("/views/components/panes/ticketOffice.fxml");
+      } else if (actionEvent.getSource() == usersButton) {
+        loadPane("/views/components/panes/users.fxml");
       }
   }
     

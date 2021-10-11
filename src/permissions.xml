@@ -30,6 +30,10 @@
                 <permission access='false'>Tickets.insert</permission>
                 <permission access='false'>Tickets.modify</permission>
                 <permission access='false'>Tickets.delete</permission>
+                <!--permissions Users-->
+                <permission access='true'>Tickets.view</permission>
+                <permission access='false'>Tickets.modify</permission>
+                <permission access='false'>Tickets.delete</permission>
 	</role>
 	<role name='Gerente'>
                 <!--permissions Artists-->
@@ -62,6 +66,10 @@
                 <permission access='false'>Tickets.insert</permission>
                 <permission access='false'>Tickets.modify</permission>
                 <permission access='false'>Tickets.delete</permission>
+                <!--permissions Users-->
+                <permission access='true'>Tickets.view</permission>
+                <permission access='true'>Tickets.modify</permission>
+                <permission access='true'>Tickets.delete</permission>
 	</role>
 	<role name='Administrador'>
                 <!--permissions Artists-->

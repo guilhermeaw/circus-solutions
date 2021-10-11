@@ -6,7 +6,8 @@ public enum Pane {
   OCCUPATIONS("Occupations"),
   SHOWS("Shows"),
   TICKET_OFFICE("TicketOffice"),
-  TICKETS("Tickets");
+  TICKETS("Tickets"),
+  USERS("Users");
 
   private final String name;
 

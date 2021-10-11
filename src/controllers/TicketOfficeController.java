@@ -83,12 +83,18 @@ public class TicketOfficeController implements Initializable {
         
         fieldShow.setText(currentShow.toString());
         fieldCapacity.setText(String.valueOf(currentShow.getCapacity()));
+
+        double ticketValue = 0;
+
+        if (ticketConfig != null) {
+          ticketValue = ticketConfig.getValue();
+        }
         
         /*
           buscar sequencial do ticket para botar aqui
         */
         int nextSequential = TicketSellManager.getInstance().getLastSequential(currentShow) + 1;
-        fieldTicket.setText("INGRESSO-" + nextSequential + " | " + CurrencyFormatter.format(String.valueOf(ticketConfig.getValue())));
+        fieldTicket.setText("INGRESSO-" + nextSequential + " | " + CurrencyFormatter.format(String.valueOf(ticketValue)));
       }
     }
 }

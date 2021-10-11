@@ -9,8 +9,10 @@ import org.controlsfx.control.Notifications;
 
 import common.EditorCallback;
 import db.managers.ShowManager;
+import db.managers.TicketConfigManager;
 import editors.ShowEditor;
 import entities.Show;
+import entities.TicketConfig;
 import formatters.DateFormatter;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -159,7 +161,7 @@ public class ShowController implements Initializable {
         Show selectedShow = showsTable.getSelectionModel().getSelectedItem();
         Show currentActiveShow = ShowService.getCurrentActiveShow();
 
-        if (currentActiveShow != null) {
+        if (currentActiveShow != null) {          
             if (currentActiveShow.getId() != selectedShow.getId()) {
                 AlertService.showWarning("Já existe um show com as vendas ativas. É necessário primeiramente encerrar as vendas do show ativo, através da bilheteria");
                 return;
@@ -167,6 +169,13 @@ public class ShowController implements Initializable {
 
             AlertService.showWarning("O show já está com as vendas ativas na bilheteria");
         } else {
+            TicketConfig lastTicketConfig = TicketConfigManager.getInstance().getLastTicketConfig();
+            
+            if (lastTicketConfig == null) {
+                AlertService.showWarning("É necessário primeiro definir um valor de ingresso na aba 'Ingressos'");
+                return;
+            }
+            
             if (selectedShow.getDate().before(DateUtils.getDateByLocalDate(LocalDate.now()))) {
                 AlertService.showWarning("A data do show já passou, não é possível iniciar as vendas");
                 return;
@@ -184,145 +193,4 @@ public class ShowController implements Initializable {
             activeSalesNotification.show();
         }
     }
-
-    /**
-     * @return Button return the buttonAdd
-     */
-    public Button getButtonAdd() {
-        return buttonAdd;
-    }
-
-    /**
-     * @param buttonAdd the buttonAdd to set
-     */
-    public void setButtonAdd(Button buttonAdd) {
-        this.buttonAdd = buttonAdd;
-    }
-
-    /**
-     * @return Button return the buttonEdit
-     */
-    public Button getButtonEdit() {
-        return buttonEdit;
-    }
-
-    /**
-     * @param buttonEdit the buttonEdit to set
-     */
-    public void setButtonEdit(Button buttonEdit) {
-        this.buttonEdit = buttonEdit;
-    }
-
-    /**
-     * @return Button return the buttonDelete
-     */
-    public Button getButtonDelete() {
-        return buttonDelete;
-    }
-
-    /**
-     * @param buttonDelete the buttonDelete to set
-     */
-    public void setButtonDelete(Button buttonDelete) {
-        this.buttonDelete = buttonDelete;
-    }
-
-    /**
-     * @return Button return the buttonStartSales
-     */
-    public Button getButtonStartSales() {
-        return buttonStartSales;
-    }
-
-    /**
-     * @param buttonStartSales the buttonStartSales to set
-     */
-    public void setButtonStartSales(Button buttonStartSales) {
-        this.buttonStartSales = buttonStartSales;
-    }
-
-    /**
-     * @return TableView<Show> return the showsTable
-     */
-    public TableView<Show> getShowsTable() {
-        return showsTable;
-    }
-
-    /**
-     * @param showsTable the showsTable to set
-     */
-    public void setShowsTable(TableView<Show> showsTable) {
-        this.showsTable = showsTable;
-    }
-
-    /**
-     * @return TableColumn<Show, String> return the dateColumn
-     */
-    public TableColumn<Show, String> getDateColumn() {
-        return dateColumn;
-    }
-
-    /**
-     * @param dateColumn the dateColumn to set
-     */
-    public void setDateColumn(TableColumn<Show, String> dateColumn) {
-        this.dateColumn = dateColumn;
-    }
-
-    /**
-     * @return TableColumn<Show, String> return the capacityColumn
-     */
-    public TableColumn<Show, String> getCapacityColumn() {
-        return capacityColumn;
-    }
-
-    /**
-     * @param capacityColumn the capacityColumn to set
-     */
-    public void setCapacityColumn(TableColumn<Show, String> capacityColumn) {
-        this.capacityColumn = capacityColumn;
-    }
-
-    /**
-     * @return TableColumn<Show, String> return the cityColumn
-     */
-    public TableColumn<Show, String> getCityColumn() {
-        return cityColumn;
-    }
-
-    /**
-     * @param cityColumn the cityColumn to set
-     */
-    public void setCityColumn(TableColumn<Show, String> cityColumn) {
-        this.cityColumn = cityColumn;
-    }
-
-    /**
-     * @return TableColumn<Show, String> return the stateColumn
-     */
-    public TableColumn<Show, String> getStateColumn() {
-        return stateColumn;
-    }
-
-    /**
-     * @param stateColumn the stateColumn to set
-     */
-    public void setStateColumn(TableColumn<Show, String> stateColumn) {
-        this.stateColumn = stateColumn;
-    }
-
-    /**
-     * @return TableColumn<Show, String> return the authorColumn
-     */
-    public TableColumn<Show, String> getAuthorColumn() {
-        return authorColumn;
-    }
-
-    /**
-     * @param authorColumn the authorColumn to set
-     */
-    public void setAuthorColumn(TableColumn<Show, String> authorColumn) {
-        this.authorColumn = authorColumn;
-    }
-
 }

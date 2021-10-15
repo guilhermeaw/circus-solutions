@@ -11,6 +11,8 @@ import common.EditorCallback;
 import db.managers.ShowManager;
 import db.managers.TicketConfigManager;
 import editors.ShowEditor;
+import entities.Operation;
+import entities.Pane;
 import entities.Show;
 import entities.TicketConfig;
 import formatters.DateFormatter;
@@ -26,6 +28,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.util.Duration;
 import services.AlertService;
+import services.PermissionService;
 import services.ShowService;
 import utils.ApplicationUtilities;
 import utils.DateUtils;
@@ -101,96 +104,104 @@ public class ShowController implements Initializable {
 
     @FXML
     void handleAddShow(ActionEvent event) {   
-        new ShowEditor(new EditorCallback<Show>(new Show()) {
-            @Override
-            public void onEvent() {
-                try {
-                    ShowManager.getInstance().create((Show) getSource());
-                    
-                    refreshContent();
-                } catch ( Exception e ) {
-                    ApplicationUtilities.getInstance().handleException(e);
-                }
-            }
-        } ).open();
-    }
-
-    @FXML
-    public void handleEditShow(ActionEvent event) {
-        Show selectedShow = showsTable.getSelectionModel().getSelectedItem();
-
-        if (selectedShow != null) {
-            new ShowEditor(new EditorCallback<Show>(selectedShow) {
+        if (PermissionService.hasAccess(Operation.DELETE, Pane.SHOWS)) {
+            new ShowEditor(new EditorCallback<Show>(new Show()) {
                 @Override
                 public void onEvent() {
                     try {
-                        ShowManager.getInstance().update((Show) getSource());
-
+                        ShowManager.getInstance().create((Show) getSource());
+                        
                         refreshContent();
                     } catch ( Exception e ) {
                         ApplicationUtilities.getInstance().handleException(e);
                     }
                 }
             } ).open();
-        } else {
-            AlertService.showWarning("É necessário selecionar um show");
+        }
+    }
+
+    @FXML
+    public void handleEditShow(ActionEvent event) {
+        if (PermissionService.hasAccess(Operation.MODIFY, Pane.SHOWS)) {
+            Show selectedShow = showsTable.getSelectionModel().getSelectedItem();
+    
+            if (selectedShow != null) {
+                new ShowEditor(new EditorCallback<Show>(selectedShow) {
+                    @Override
+                    public void onEvent() {
+                        try {
+                            ShowManager.getInstance().update((Show) getSource());
+    
+                            refreshContent();
+                        } catch ( Exception e ) {
+                            ApplicationUtilities.getInstance().handleException(e);
+                        }
+                    }
+                } ).open();
+            } else {
+                AlertService.showWarning("É necessário selecionar um show");
+            }
         }
     }
 
     @FXML
     public void handleDeleteShow(ActionEvent event) {
-        Show selectedShow = showsTable.getSelectionModel().getSelectedItem();
-
-        if (selectedShow != null) {
-            if (AlertService.showConfirmation("Tem certeza que deseja excluir o show do dia: " + selectedShow.getDate() + "?")) {
-                try {
-                    ShowManager.getInstance().delete(selectedShow);
-
-                    refreshContent();
-                } catch (Exception e) {
-                    ApplicationUtilities.getInstance().handleException(e);
+        if (PermissionService.hasAccess(Operation.DELETE, Pane.SHOWS)) {
+            Show selectedShow = showsTable.getSelectionModel().getSelectedItem();
+    
+            if (selectedShow != null) {
+                if (AlertService.showConfirmation("Tem certeza que deseja excluir o show do dia: " + selectedShow.getDate() + "?")) {
+                    try {
+                        ShowManager.getInstance().delete(selectedShow);
+    
+                        refreshContent();
+                    } catch (Exception e) {
+                        ApplicationUtilities.getInstance().handleException(e);
+                    }
                 }
+            } else {
+                AlertService.showWarning("É necessário selecionar um show");
             }
-        } else {
-            AlertService.showWarning("É necessário selecionar um show");
         }
     } 
 
     @FXML
     public void handleStartSales(ActionEvent event) {
-        Show selectedShow = showsTable.getSelectionModel().getSelectedItem();
-        Show currentActiveShow = ShowService.getCurrentActiveShow();
-
-        if (currentActiveShow != null) {          
-            if (currentActiveShow.getId() != selectedShow.getId()) {
-                AlertService.showWarning("Já existe um show com as vendas ativas. É necessário primeiramente encerrar as vendas do show ativo, através da bilheteria");
-                return;
-            } 
-
-            AlertService.showWarning("O show já está com as vendas ativas na bilheteria");
-        } else {
-            TicketConfig lastTicketConfig = TicketConfigManager.getInstance().getLastTicketConfig();
-            
-            if (lastTicketConfig == null) {
-                AlertService.showWarning("É necessário primeiro definir um valor de ingresso na aba 'Ingressos'");
-                return;
+        if (PermissionService.hasAccess(Operation.MODIFY, Pane.SHOWS)) {
+            Show selectedShow = showsTable.getSelectionModel().getSelectedItem();
+            Show currentActiveShow = ShowService.getCurrentActiveShow();
+    
+            if (currentActiveShow != null) {          
+                if (currentActiveShow.getId() != selectedShow.getId()) {
+                    AlertService.showWarning("Já existe um show com as vendas ativas. É necessário primeiramente encerrar as vendas do show ativo, através da bilheteria");
+                    return;
+                } 
+    
+                AlertService.showWarning("O show já está com as vendas ativas na bilheteria");
+            } else {
+                TicketConfig lastTicketConfig = TicketConfigManager.getInstance().getLastTicketConfig();
+                
+                if (lastTicketConfig == null) {
+                    AlertService.showWarning("É necessário primeiro definir um valor de ingresso na aba 'Ingressos'");
+                    return;
+                }
+                
+                if (selectedShow.getDate().before(DateUtils.getDateByLocalDate(LocalDate.now()))) {
+                    AlertService.showWarning("A data do show já passou, não é possível iniciar as vendas");
+                    return;
+                }
+                
+                selectedShow.setIsShowActive(true);
+                ShowManager.getInstance().update(selectedShow);
+    
+                Notifications activeSalesNotification = Notifications.create()
+                                        .title("Espetáculo - Circus Solution")
+                                        .text("Vendas abertas para o show de " + selectedShow.toString() )
+                                        .position( Pos.BOTTOM_RIGHT )
+                                        .hideAfter( Duration.seconds( 10 ) );
+    
+                activeSalesNotification.show();
             }
-            
-            if (selectedShow.getDate().before(DateUtils.getDateByLocalDate(LocalDate.now()))) {
-                AlertService.showWarning("A data do show já passou, não é possível iniciar as vendas");
-                return;
-            }
-            
-            selectedShow.setIsShowActive(true);
-            ShowManager.getInstance().update(selectedShow);
-
-            Notifications activeSalesNotification = Notifications.create()
-                                    .title("Espetáculo - Circus Solution")
-                                    .text("Vendas abertas para o show de " + selectedShow.toString() )
-                                    .position( Pos.BOTTOM_RIGHT )
-                                    .hideAfter( Duration.seconds( 10 ) );
-
-            activeSalesNotification.show();
         }
     }
 }

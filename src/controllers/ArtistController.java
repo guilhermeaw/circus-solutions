@@ -8,6 +8,8 @@ import common.EditorCallback;
 import db.managers.ArtistManager;
 import editors.ArtistEditor;
 import entities.Artist;
+import entities.Operation;
+import entities.Pane;
 import formatters.CpfFormatter;
 import formatters.PhoneFormatter;
 import javafx.beans.property.SimpleStringProperty;
@@ -20,6 +22,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import services.AlertService;
+import services.PermissionService;
 import utils.ApplicationUtilities;
 
 public class ArtistController implements Initializable {
@@ -83,58 +86,64 @@ public class ArtistController implements Initializable {
 
   @FXML
   public void handleAddArtist(ActionEvent event) {
-    new ArtistEditor(new EditorCallback<Artist>(new Artist()) {
-      @Override
-      public void onEvent() {
-        try {
-          ArtistManager.getInstance().create((Artist) getSource());
-
-          refreshContent();
-        } catch (Exception e) {
-          ApplicationUtilities.getInstance().handleException(e);
+    if (PermissionService.hasAccess(Operation.INSERT, Pane.ARTISTS)) {
+      new ArtistEditor(new EditorCallback<Artist>(new Artist()) {
+        @Override
+        public void onEvent() {
+          try {
+            ArtistManager.getInstance().create((Artist) getSource());
+  
+            refreshContent();
+          } catch (Exception e) {
+            ApplicationUtilities.getInstance().handleException(e);
+          }
         }
-      }
-    }).open();
+      }).open();
+    }
   }
 
   @FXML
   public void handleDeleteArtist(ActionEvent event) {
-    Artist selectedArtist = artistsTable.getSelectionModel().getSelectedItem();
-
-    if (selectedArtist != null) {
-      if (AlertService.showConfirmation("Tem certeza que deseja excluir o artista " + selectedArtist.getName() + "?")) {
-        try {
-          ArtistManager.getInstance().delete(selectedArtist);
-
-          refreshContent();
-        } catch (Exception e) {
-          ApplicationUtilities.getInstance().handleException(e);
+    if (PermissionService.hasAccess(Operation.DELETE, Pane.ARTISTS)) {
+      Artist selectedArtist = artistsTable.getSelectionModel().getSelectedItem();
+  
+      if (selectedArtist != null) {
+        if (AlertService.showConfirmation("Tem certeza que deseja excluir o artista " + selectedArtist.getName() + "?")) {
+          try {
+            ArtistManager.getInstance().delete(selectedArtist);
+  
+            refreshContent();
+          } catch (Exception e) {
+            ApplicationUtilities.getInstance().handleException(e);
+          }
         }
+      } else {
+        AlertService.showWarning("É necessário selecionar um artista");
       }
-    } else {
-      AlertService.showWarning("É necessário selecionar um artista");
     }
   }
 
   @FXML
   public void handleEditArtist(ActionEvent event) {
-    Artist selectedArtist = artistsTable.getSelectionModel().getSelectedItem();
-
-    if (selectedArtist != null) {
-      new ArtistEditor(new EditorCallback<Artist>(selectedArtist) {
-        @Override
-        public void onEvent() {
-          try {
-            ArtistManager.getInstance().update((Artist) getSource());
-
-            refreshContent();
-          } catch ( Exception e ) {
-            ApplicationUtilities.getInstance().handleException(e);
+    if (PermissionService.hasAccess(Operation.DELETE, Pane.ARTISTS)) {
+      Artist selectedArtist = artistsTable.getSelectionModel().getSelectedItem();
+  
+      if (selectedArtist != null) {
+        new ArtistEditor(new EditorCallback<Artist>(selectedArtist) {
+          @Override
+          public void onEvent() {
+            try {
+              ArtistManager.getInstance().update((Artist) getSource());
+  
+              refreshContent();
+            } catch ( Exception e ) {
+              ApplicationUtilities.getInstance().handleException(e);
+            }
           }
-        }
-      }).open();
-    } else {
-      AlertService.showWarning("É necessário selecionar um artista");
+        }).open();
+      } else {
+        AlertService.showWarning("É necessário selecionar um artista");
+      }
     }
   }
 }

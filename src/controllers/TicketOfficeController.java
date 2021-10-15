@@ -7,6 +7,8 @@ import java.util.ResourceBundle;
 import db.managers.ShowManager;
 import db.managers.TicketConfigManager;
 import db.managers.TicketSellManager;
+import entities.Operation;
+import entities.Pane;
 import entities.Show;
 import entities.TicketConfig;
 import formatters.CurrencyFormatter;
@@ -16,6 +18,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import services.AlertService;
+import services.PermissionService;
 import services.SceneChangeService;
 import services.ShowService;
 import services.TicketOfficeService;
@@ -53,28 +56,32 @@ public class TicketOfficeController implements Initializable {
 
     @FXML
     void handleCloseSales(ActionEvent event) {
-      if (AlertService.showConfirmation("Tem certeza que deseja encerrar a venda de ingressos?")) {
-        currentShow.setIsShowActive(false);
-        ShowManager.getInstance().update(currentShow);
-
-        new SceneChangeService().changeSceneTo("/views/dashboard.fxml");
+      if (PermissionService.hasAccess(Operation.MODIFY, Pane.TICKET_OFFICE)) {
+        if (AlertService.showConfirmation("Tem certeza que deseja encerrar a venda de ingressos?")) {
+          currentShow.setIsShowActive(false);
+          ShowManager.getInstance().update(currentShow);
+  
+          new SceneChangeService().changeSceneTo("/views/dashboard.fxml");
+        }
       }
     }
 
     @FXML
     void handleSellTicket(ActionEvent event) {
-      /*
-        não permitir a venda se a data do show for igual ou anterior a atual
-      */
-      TicketConfig ticketConfig = TicketConfigManager.getInstance().getLastTicketConfig();
-
-      if (currentShow != null && currentShow.getDate().before(DateUtils.getDateByLocalDate(LocalDate.now()))) {
-        AlertService.showWarning("Não é possível vender ingressos para um show que já passou");
-        return;
+      if (PermissionService.hasAccess(Operation.MODIFY, Pane.TICKET_OFFICE)) {
+        /*
+          não permitir a venda se a data do show for igual ou anterior a atual
+        */
+        TicketConfig ticketConfig = TicketConfigManager.getInstance().getLastTicketConfig();
+  
+        if (currentShow != null && currentShow.getDate().before(DateUtils.getDateByLocalDate(LocalDate.now()))) {
+          AlertService.showWarning("Não é possível vender ingressos para um show que já passou");
+          return;
+        }
+  
+        TicketOfficeService.sellTicket(currentShow, ticketConfig);
+        loadFieldValues();
       }
-
-      TicketOfficeService.sellTicket(currentShow, ticketConfig);
-      loadFieldValues();
     }
 
     private void loadFieldValues() {

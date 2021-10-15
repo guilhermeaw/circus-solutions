@@ -8,6 +8,8 @@ import common.EditorCallback;
 import db.managers.AttractionsManager;
 import editors.AttractionEditor;
 import entities.Attraction;
+import entities.Operation;
+import entities.Pane;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -18,6 +20,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import services.AlertService;
+import services.PermissionService;
 import utils.ApplicationUtilities;
 
 public class AttractionController implements Initializable {
@@ -78,58 +81,64 @@ public class AttractionController implements Initializable {
 
     @FXML
     void handleAddAttraction(ActionEvent event) {   
-        new AttractionEditor(new EditorCallback<Attraction>(new Attraction()) {
-            @Override
-            public void onEvent() {
-                try {
-                    AttractionsManager.getInstance().create((Attraction) getSource());
-                    
-                    refreshContent();
-                } catch ( Exception e ) {
-                    ApplicationUtilities.getInstance().handleException(e);
-                }
-            }
-        } ).open();
-    }
-
-    @FXML
-    public void handleEditAttraction(ActionEvent event) {
-        Attraction selectedAttraction = attractionsTable.getSelectionModel().getSelectedItem();
-
-        if (selectedAttraction != null) {
-            new AttractionEditor(new EditorCallback<Attraction>(selectedAttraction) {
+        if (PermissionService.hasAccess(Operation.INSERT, Pane.ATTRACTIONS)) {
+            new AttractionEditor(new EditorCallback<Attraction>(new Attraction()) {
                 @Override
                 public void onEvent() {
                     try {
-                        AttractionsManager.getInstance().update((Attraction) getSource());
-
+                        AttractionsManager.getInstance().create((Attraction) getSource());
+                        
                         refreshContent();
                     } catch ( Exception e ) {
                         ApplicationUtilities.getInstance().handleException(e);
                     }
                 }
             } ).open();
-        } else {
-            AlertService.showWarning("É necessário selecionar uma atração");
+        }
+    }
+
+    @FXML
+    public void handleEditAttraction(ActionEvent event) {
+        if (PermissionService.hasAccess(Operation.MODIFY, Pane.ATTRACTIONS)) {
+            Attraction selectedAttraction = attractionsTable.getSelectionModel().getSelectedItem();
+    
+            if (selectedAttraction != null) {
+                new AttractionEditor(new EditorCallback<Attraction>(selectedAttraction) {
+                    @Override
+                    public void onEvent() {
+                        try {
+                            AttractionsManager.getInstance().update((Attraction) getSource());
+    
+                            refreshContent();
+                        } catch ( Exception e ) {
+                            ApplicationUtilities.getInstance().handleException(e);
+                        }
+                    }
+                } ).open();
+            } else {
+                AlertService.showWarning("É necessário selecionar uma atração");
+            }
         }
     }
 
     @FXML
     public void handleDeleteAttraction(ActionEvent event) {
-        Attraction selectedAttraction = attractionsTable.getSelectionModel().getSelectedItem();
-
-        if (selectedAttraction != null) {
-            if (AlertService.showConfirmation("Tem certeza que deseja excluir a atração " + selectedAttraction.getName() + "?")) {
-                try {
-                    AttractionsManager.getInstance().delete(selectedAttraction);
-
-                    refreshContent();
-                } catch (Exception e) {
-                    ApplicationUtilities.getInstance().handleException(e);
+        if (PermissionService.hasAccess(Operation.DELETE, Pane.ATTRACTIONS)) {
+            Attraction selectedAttraction = attractionsTable.getSelectionModel().getSelectedItem();
+    
+            if (selectedAttraction != null) {
+                if (AlertService.showConfirmation("Tem certeza que deseja excluir a atração " + selectedAttraction.getName() + "?")) {
+                    try {
+                        AttractionsManager.getInstance().delete(selectedAttraction);
+    
+                        refreshContent();
+                    } catch (Exception e) {
+                        ApplicationUtilities.getInstance().handleException(e);
+                    }
                 }
+            } else {
+                AlertService.showWarning("É necessário selecionar uma atração");
             }
-        } else {
-            AlertService.showWarning("É necessário selecionar uma atração");
         }
     } 
 }

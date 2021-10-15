@@ -16,7 +16,13 @@ public class PermissionService extends DefaultHandler {
     
     PermissionXMLReader permissionReader = new PermissionXMLReader(role, operation, pane);
     permissionReader.parse();
+
+    boolean canAccess = permissionReader.canAccess();
+
+    if (!canAccess) {
+      AlertService.showWarning("Usuário sem permissão!");
+    }
     
-    return permissionReader.canAccess();
+    return canAccess;
   }
 }

@@ -6,6 +6,8 @@ import java.util.Date;
 import java.util.ResourceBundle;
 
 import db.managers.TicketConfigManager;
+import entities.Operation;
+import entities.Pane;
 import entities.Show;
 import entities.TicketConfig;
 import formatters.CurrencyFormatter;
@@ -19,6 +21,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import services.AlertService;
+import services.PermissionService;
 import services.ShowService;
 import utils.ApplicationUtilities;
 
@@ -64,31 +67,35 @@ public class TicketController implements Initializable {
 
     @FXML
     void handleEditTicketConfig(ActionEvent event) {
-        Show currentActiveShow = ShowService.getCurrentActiveShow();
-
-        if (currentActiveShow != null) {
-            AlertService.showWarning("Não é possível alterar o valor do ingresso quando há espetáculos em atividade. Para continuar, primeiro encerre as vendas na bilheteria");
-            return;
+        if (PermissionService.hasAccess(Operation.MODIFY, Pane.TICKETS)) {
+            Show currentActiveShow = ShowService.getCurrentActiveShow();
+    
+            if (currentActiveShow != null) {
+                AlertService.showWarning("Não é possível alterar o valor do ingresso quando há espetáculos em atividade. Para continuar, primeiro encerre as vendas na bilheteria");
+                return;
+            }
+    
+            buttonConfirm.setDisable(false);
+            buttonCancel.setDisable(false);
+    
+            fieldValue.setDisable(false);
+            fieldValue.setText(CurrencyFormatter.format(String.valueOf(currencyAmount.get())));
         }
-
-        buttonConfirm.setDisable(false);
-        buttonCancel.setDisable(false);
-
-        fieldValue.setDisable(false);
-        fieldValue.setText(CurrencyFormatter.format(String.valueOf(currencyAmount.get())));
     }
 
     @FXML
     void handleUpdateTicketConfig(ActionEvent event) {
-        TicketConfig ticketConfig = new TicketConfig();
-
-        ticketConfig.setAuthor(ApplicationUtilities.getInstance().getActiveUser());
-        ticketConfig.setCreatedDate(new Timestamp(new Date().getTime()));
-        ticketConfig.setValue(currencyAmount.get());
-
-        TicketConfigManager.getInstance().create(ticketConfig);
-        
-        refreshContent();
+        if (PermissionService.hasAccess(Operation.MODIFY, Pane.TICKETS)) {
+            TicketConfig ticketConfig = new TicketConfig();
+    
+            ticketConfig.setAuthor(ApplicationUtilities.getInstance().getActiveUser());
+            ticketConfig.setCreatedDate(new Timestamp(new Date().getTime()));
+            ticketConfig.setValue(currencyAmount.get());
+    
+            TicketConfigManager.getInstance().create(ticketConfig);
+            
+            refreshContent();
+        }
     }
 
     @FXML

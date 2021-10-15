@@ -7,6 +7,8 @@ import java.util.ResourceBundle;
 import common.EditorCallback;
 import db.managers.UserManager;
 import editors.UserEditor;
+import entities.Operation;
+import entities.Pane;
 import entities.User;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -18,6 +20,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import services.AlertService;
+import services.PermissionService;
 import utils.ApplicationUtilities;
 
 public class UserController implements Initializable {
@@ -74,48 +77,52 @@ public class UserController implements Initializable {
 
   @FXML
   void handleDeleteUser(ActionEvent event) {
-    User selectedUser = usersTable.getSelectionModel().getSelectedItem();
-    User activeUser = ApplicationUtilities.getInstance().getActiveUser();
-
-    if (selectedUser != null) {
-      if (activeUser.getRole().getLevel() < selectedUser.getRole().getLevel()) {
-        AlertService.showWarning("Não é possível excluir um usuário com um nível de permissão maior que o seu");
-        return;
-      }
-      
-      if (AlertService.showConfirmation("Tem certeza que deseja excluir o usuário " + selectedUser.getName() + "?")) {
-        try {
-          UserManager.getInstance().delete(selectedUser);
-
-          refreshContent();
-        } catch (Exception e) {
-          ApplicationUtilities.getInstance().handleException(e);
+    if (PermissionService.hasAccess(Operation.DELETE, Pane.USERS)) {
+      User selectedUser = usersTable.getSelectionModel().getSelectedItem();
+      User activeUser = ApplicationUtilities.getInstance().getActiveUser();
+  
+      if (selectedUser != null) {
+        if (activeUser.getRole().getLevel() < selectedUser.getRole().getLevel()) {
+          AlertService.showWarning("Não é possível excluir um usuário com um nível de permissão maior que o seu");
+          return;
         }
+        
+        if (AlertService.showConfirmation("Tem certeza que deseja excluir o usuário " + selectedUser.getName() + "?")) {
+          try {
+            UserManager.getInstance().delete(selectedUser);
+  
+            refreshContent();
+          } catch (Exception e) {
+            ApplicationUtilities.getInstance().handleException(e);
+          }
+        }
+      } else {
+        AlertService.showWarning("É necessário selecionar um usuário");
       }
-    } else {
-      AlertService.showWarning("É necessário selecionar um usuário");
     }
   }
 
   @FXML
   void handleEditUser(ActionEvent event) {
-    User selectedUser = usersTable.getSelectionModel().getSelectedItem();
-
-    if (selectedUser != null) {
-      new UserEditor(new EditorCallback<User>(selectedUser) {
-        @Override
-        public void onEvent() {
-          try {
-            UserManager.getInstance().update((User) getSource());
-
-            refreshContent();
-          } catch ( Exception e ) {
-            ApplicationUtilities.getInstance().handleException(e);
+    if (PermissionService.hasAccess(Operation.MODIFY, Pane.USERS)) {
+      User selectedUser = usersTable.getSelectionModel().getSelectedItem();
+  
+      if (selectedUser != null) {
+        new UserEditor(new EditorCallback<User>(selectedUser) {
+          @Override
+          public void onEvent() {
+            try {
+              UserManager.getInstance().update((User) getSource());
+  
+              refreshContent();
+            } catch ( Exception e ) {
+              ApplicationUtilities.getInstance().handleException(e);
+            }
           }
-        }
-      }).open();
-    } else {
-      AlertService.showWarning("É necessário selecionar um usuário");
+        }).open();
+      } else {
+        AlertService.showWarning("É necessário selecionar um usuário");
+      }
     }
   }
 }

@@ -29,8 +29,11 @@ public class Audit {
     @Column(name="date", nullable=false)
     private Timestamp date;
 
-    @Column(name="type", nullable=false, length=500)
+    @Column(name="type", nullable=false)
     private String type;
+
+    @Column(name="table_name", nullable=false)
+    private String tableName;
 
     public int getId() {
         return id;
@@ -46,7 +49,6 @@ public class Audit {
 
     public void setDate(Timestamp date) {
         this.date = date;
-        //this.date = new java.sql.Date(new java.util.Date().getTime());
     }
 
     public User getUser() {
@@ -63,5 +65,13 @@ public class Audit {
     
     public void setType(String type) {
         this.type = type;
+    }
+
+    public String getTableName() {
+        return tableName;
+    }
+
+    public void setTableName(String tableName) {
+        this.tableName = tableName;
     }
 }

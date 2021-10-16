@@ -3,6 +3,7 @@ package utils;
 import entities.User;
 import javafx.stage.Stage;
 import services.AlertService;
+import services.ErrorService;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
@@ -31,6 +32,10 @@ public class ApplicationUtilities {
   }
 
   public void handleException(Exception e) {
+    handleException(e, true);
+  }
+
+  public void handleException(Exception e, boolean shouldCreateErrorLog) {
     StringWriter sw = new StringWriter();
     e.printStackTrace(new PrintWriter(sw));
     String exceptionAsString = sw.toString();
@@ -39,6 +44,10 @@ public class ApplicationUtilities {
 
     AlertService.showError(errorMessage);
     e.printStackTrace();
+
+    if (shouldCreateErrorLog) {
+        ErrorService.create(e);
+    }
   }
 
   public User getActiveUser() {

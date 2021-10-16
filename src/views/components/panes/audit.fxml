@@ -27,9 +27,10 @@
             </HBox>
             <TableView fx:id="auditTable" prefHeight="504.0" prefWidth="945.0">
                <columns>
-                  <TableColumn fx:id="nameColumn" prefWidth="266.0" text="Nome" />
-                  <TableColumn fx:id="dateColumn" prefWidth="202.0" text="Data" />
-                  <TableColumn fx:id="actionColumn" prefWidth="484.0" text="Ação" />
+                  <TableColumn fx:id="nameColumn" prefWidth="190.0" text="Nome" />
+                  <TableColumn fx:id="dateColumn" prefWidth="155.0" text="Data" />
+                  <TableColumn fx:id="actionColumn" prefWidth="271.0" text="Ação" />
+                  <TableColumn fx:id="tableNameColumn" prefWidth="328.0" text="Tabela" />
                </columns>
                <VBox.margin>
                   <Insets left="16.0" right="16.0" />

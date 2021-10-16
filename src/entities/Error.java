@@ -12,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Type;
 
 @Entity
 @Table(name="Error")
@@ -29,7 +30,8 @@ public class Error {
     @Column(name="date", nullable=false)
     private Timestamp date;
 
-    @Column(name="error", nullable=false, length=500)
+    @Column(name="error", nullable=false)
+    @Type(type="text")
     private String error;
 
     public int getId() {

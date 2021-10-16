@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<Pane minHeight="-Infinity" minWidth="-Infinity" prefHeight="638.0" prefWidth="986.0" styleClass="pane" stylesheets="@../../styles/default.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.WelcomeController">
+   <children>
+      <VBox prefHeight="638.0" prefWidth="986.0">
+         <children>
+            <Text fx:id="textWelcome" strokeType="OUTSIDE" strokeWidth="0.0" text="Olá, " wrappingWidth="882.435546875">
+               <font>
+                  <Font name="System Bold" size="48.0" />
+               </font>
+            </Text>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Seja bem-vindo ao Circus Solutions, a solução para seus problemas no gerenciamento do seu circo." textAlignment="JUSTIFY" wrappingWidth="919.296875">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Text>
+            <HBox alignment="CENTER" prefHeight="200.0" prefWidth="895.0" spacing="16.0">
+               <children>
+                  <ImageView fitHeight="200.0" fitWidth="200.0">
+                     <image>
+                        <Image url="@../../../res/images/sidebar-big.png" />
+                     </image>
+                  </ImageView>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Para utilizar o sistema é bem simples, basta você navegar pelas telas através dos botões da sidebar. Através deles, você consegue gerir todas as atividades dentro do seu circo." textAlignment="JUSTIFY" wrappingWidth="705.267578125">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Text>
+               </children>
+               <VBox.margin>
+                  <Insets top="64.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox alignment="CENTER_RIGHT" prefWidth="432.0" spacing="16.0">
+               <children>
+                  <HBox alignment="CENTER" prefHeight="98.0" prefWidth="384.0" spacing="16.0" style="-fx-border-color: #FFB84D; -fx-border-width: 4; -fx-border-radius: 4;">
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Para maiores dúvidas, você pode contatar nosso suporte." textAlignment="JUSTIFY" wrappingWidth="319.267578125">
+                           <font>
+                              <Font size="24.0" />
+                           </font>
+                        </Text>
+                        <ImageView>
+                           <image>
+                              <Image url="@../../../res/images/information.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                     <padding>
+                        <Insets bottom="16.0" left="16.0" right="16.0" top="16.0" />
+                     </padding>
+                  </HBox>
+               </children>
+               <VBox.margin>
+                  <Insets top="24.0" />
+               </VBox.margin>
+            </HBox>
+         </children>
+         <padding>
+            <Insets bottom="40.0" left="40.0" right="40.0" top="40.0" />
+         </padding>
+      </VBox>
+   </children>
+</Pane>

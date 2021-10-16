@@ -20,6 +20,9 @@
 		<mapping class="entities.TicketConfig" />
 		<mapping class="entities.TicketSell" />
 		<mapping class="entities.User" />
+		<mapping class="entities.Login" />
+		<mapping class="entities.Audit" />
+		<mapping class="entities.Error" />
 
 	</session-factory>
 </hibernate-configuration>

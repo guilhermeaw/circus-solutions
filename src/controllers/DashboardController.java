@@ -23,6 +23,9 @@ public class DashboardController implements Initializable {
     private Button buttonLogout;
 
     @FXML
+    private Button buttonEditUser;
+
+    @FXML
     private StackPane dashboardStackPane;
 
     @FXML
@@ -46,6 +49,9 @@ public class DashboardController implements Initializable {
     @FXML
     private Button usersButton;
 
+    @FXML
+    private Button administrationButton;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
       loadViewPermissions();
@@ -62,6 +68,8 @@ public class DashboardController implements Initializable {
         loadPane("/views/components/panes/tickets.fxml");
       } else if (actionEvent.getSource() == showsButton) {
         loadPane("/views/components/panes/show.fxml");
+      } else if (actionEvent.getSource() == administrationButton) {
+        loadPane("/views/components/panes/auditErrorsTabbedPane.fxml");
       } else if (actionEvent.getSource() == ticketOfficeButton) {
         boolean hasActiveShow = ShowService.getCurrentActiveShow() != null;
         

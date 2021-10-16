@@ -28,3 +28,7 @@
 .pane {
   -fx-padding: 16 32;
 }
+
+.secondary-button {
+  -fx-background-color:  #BEBEBE;
+}

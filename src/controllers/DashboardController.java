@@ -23,9 +23,6 @@ public class DashboardController implements Initializable {
     private Button buttonLogout;
 
     @FXML
-    private Button buttonEditUser;
-
-    @FXML
     private StackPane dashboardStackPane;
 
     @FXML

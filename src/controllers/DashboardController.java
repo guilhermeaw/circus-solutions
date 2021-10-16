@@ -51,6 +51,7 @@ public class DashboardController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+      loadDefaultPane();
       loadViewPermissions();
     }
 
@@ -84,6 +85,10 @@ public class DashboardController implements Initializable {
     @FXML
     void handleLogout(ActionEvent event) {
       LoginService.doLogout();
+    }
+
+    private void loadDefaultPane() {
+      loadPane("/views/components/panes/welcome.fxml");
     }
 
     private void loadPane(String paneSrc) {

@@ -19,7 +19,7 @@ public class PermissionService extends DefaultHandler {
 
     boolean canAccess = permissionReader.canAccess();
 
-    if (!canAccess) {
+    if (!canAccess && operation != Operation.VIEW) {
       AlertService.showWarning("Usuário sem permissão!");
     }
     

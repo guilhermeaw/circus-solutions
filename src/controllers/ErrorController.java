@@ -23,9 +23,6 @@ import utils.ApplicationUtilities;
 
 public class ErrorController implements Initializable {
   @FXML
-  private Button deleteButton;
-
-  @FXML
   private TableView<Error> errorTable;
 
   @FXML
@@ -40,16 +37,6 @@ public class ErrorController implements Initializable {
   @Override
   public void initialize(URL url, ResourceBundle resourceBundle) {
     refreshContent();
-
-    deleteButton.setDisable(true);
-
-    errorTable.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
-      if (newSelection != null) {
-        deleteButton.setDisable(false);
-      } else {
-        deleteButton.setDisable(true);
-      }
-    });
   }
   
   public void refreshContent() {
@@ -64,25 +51,6 @@ public class ErrorController implements Initializable {
       errorTable.setItems(auditsObservableList);
     } catch (Exception e) {
       ApplicationUtilities.getInstance().handleException(e);
-    }
-  }
-
-  @FXML
-  public void handleDeleteError(ActionEvent event) {
-    Error selectedError = errorTable.getSelectionModel().getSelectedItem();
-
-    if (selectedError != null) {
-      if (AlertService.showConfirmation("Tem certeza que deseja excluir o erro " + selectedError.getError() + " da listagem?")) {
-        try {
-          ErrorManager.getInstance().delete(selectedError);
-
-          refreshContent();
-        } catch (Exception e) {
-          ApplicationUtilities.getInstance().handleException(e);
-        }
-      }
-    } else {
-      AlertService.showWarning("É necessário selecionar um erro");
     }
   }
 }

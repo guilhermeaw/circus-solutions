@@ -69,7 +69,7 @@
                      <graphic>
                         <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <!-- <Image url="@../res/images/user.png" /> -->
+                              <Image url="@../res/images/engrenagem.png" />
                            </image>
                         </ImageView>
                      </graphic>

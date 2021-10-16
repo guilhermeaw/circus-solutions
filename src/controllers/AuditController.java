@@ -21,9 +21,6 @@ import utils.ApplicationUtilities;
 
 public class AuditController implements Initializable {
   @FXML
-  private Button deleteButton;
-
-  @FXML
   private TableView<Audit> auditTable;
 
   @FXML
@@ -38,16 +35,6 @@ public class AuditController implements Initializable {
   @Override
   public void initialize(URL url, ResourceBundle resourceBundle) {
     refreshContent();
-
-    deleteButton.setDisable(true);
-
-    auditTable.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
-      if (newSelection != null) {
-        deleteButton.setDisable(false);
-      } else {
-        deleteButton.setDisable(true);
-      }
-    });
   }
   
   public void refreshContent() {
@@ -62,25 +49,6 @@ public class AuditController implements Initializable {
       auditTable.setItems(auditsObservableList);
     } catch (Exception e) {
       ApplicationUtilities.getInstance().handleException(e);
-    }
-  }
-
-  @FXML
-  public void handleDeleteAuditoria(ActionEvent event) {
-    Audit selectedAudit = auditTable.getSelectionModel().getSelectedItem();
-
-    if (selectedAudit != null) {
-      if (AlertService.showConfirmation("Tem certeza que deseja excluir a auditoria " + selectedAudit.getType() + "?")) {
-        try {
-          AuditManager.getInstance().delete(selectedAudit);
-
-          refreshContent();
-        } catch (Exception e) {
-          ApplicationUtilities.getInstance().handleException(e);
-        }
-      }
-    } else {
-      AlertService.showWarning("É necessário selecionar uma auditoria");
     }
   }
 }

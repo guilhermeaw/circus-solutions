@@ -1,6 +1,6 @@
 package entities;
 
-import java.sql.Date;
+import java.sql.Timestamp;
 
 import javax.persistence.Column;
 import javax.persistence.FetchType;
@@ -27,7 +27,7 @@ public class Error {
     private User user;
 
     @Column(name="date", nullable=false)
-    private Date date;
+    private Timestamp date;
 
     @Column(name="error", nullable=false, length=500)
     private String error;
@@ -40,11 +40,11 @@ public class Error {
         this.id = id;
     }
 
-    public Date getDate() {
+    public Timestamp getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(Timestamp date) {
         this.date = date;
         //this.date = new java.sql.Date(new java.util.Date().getTime());
     }

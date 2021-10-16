@@ -1,12 +1,15 @@
 package db.managers;
 
 import java.lang.reflect.ParameterizedType;
+import java.sql.Timestamp;
+import java.util.Date;
 
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.hibernate.Session;
 
 import db.Database;
+import entities.Audit;
 import utils.ApplicationUtilities;
 
 public abstract class DefaultManager<T> {
@@ -20,6 +23,16 @@ public abstract class DefaultManager<T> {
       session.beginTransaction();
       session.save(value);
       logger.info("Adicionando " + getGenericName());
+      // System.out.println("Adicionando " + getGenericName());
+
+      // Auditoria insertAudit = new Auditoria();
+
+      // insertAudit.setDate(new Timestamp(new Date().getTime()));
+      // insertAudit.setType("Adicionando " + getGenericName());
+      // insertAudit.setUserLogged(ApplicationUtilities.getInstance().getActiveUser());
+
+      // AuditoriaManager.getInstance().create(insertAudit);
+
       session.getTransaction().commit();
       session.close(); 
     } catch (Exception e) {

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+
+<TabPane tabClosingPolicy="UNAVAILABLE" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/15.0.1">
+  <tabs>
+    <Tab fx:id="auditoriaTab" text="Auditoria">
+        <fx:include source="audit.fxml" />
+    </Tab>
+    <Tab fx:id="errosTab" text="Erros">
+        <fx:include source="errors.fxml" />
+    </Tab>
+  </tabs>
+</TabPane>

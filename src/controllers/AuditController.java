@@ -29,6 +29,9 @@ public class AuditController implements Initializable {
   @FXML
   private TableColumn<Audit, String> actionColumn;
 
+  @FXML
+  private TableColumn<Audit, String> tableNameColumn;
+
   @Override
   public void initialize(URL url, ResourceBundle resourceBundle) {
     refreshContent();
@@ -42,6 +45,7 @@ public class AuditController implements Initializable {
       nameColumn.setCellValueFactory(column -> new SimpleStringProperty(column.getValue().getUser().getName()));
       dateColumn.setCellValueFactory(column -> new SimpleStringProperty(DateFormatter.format(column.getValue().getDate())));
       actionColumn.setCellValueFactory(column -> new SimpleStringProperty(column.getValue().getType()));
+      tableNameColumn.setCellValueFactory(column -> new SimpleStringProperty(column.getValue().getTableName()));
 
       auditTable.setItems(auditsObservableList);
     } catch (Exception e) {

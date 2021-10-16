@@ -1,28 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Label?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
-<?import javafx.scene.shape.Line?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="638.0" prefWidth="986.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ErrorController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="986.0" styleClass="pane" stylesheets="@../../styles/default.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ErrorController">
    <children>
-      <Label layoutX="25.0" layoutY="23.0" text="Erros" textAlignment="CENTER">
-         <font>
-            <Font name="System Bold" size="24.0" />
-         </font>
-      </Label>
-      <Line endX="-23.89453125" layoutX="105.0" layoutY="58.0" startX="-80.0" />
-      <HBox layoutX="346.0" layoutY="26.0" spacing="16.0" />
-      <TableView fx:id="errorTable" layoutX="25.0" layoutY="80.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="544.0" prefWidth="954.0">
-         <columns>
-            <TableColumn fx:id="nameColumn" prefWidth="262.0" text="Nome" />
-            <TableColumn fx:id="dateColumn" prefWidth="234.0" text="Data" />
-            <TableColumn fx:id="errorColumn" prefWidth="457.0" text="Erro" />
-         </columns>
-      </TableView>
+      <VBox layoutX="10.0" layoutY="10.0">
+         <children>
+            <HBox alignment="CENTER_LEFT">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Erros" underline="true">
+                     <font>
+                        <Font name="System Bold" size="32.0" />
+                     </font>
+                  </Text>
+               </children>
+               <padding>
+                  <Insets bottom="16.0" left="16.0" right="16.0" top="16.0" />
+               </padding>
+            </HBox>
+            <TableView fx:id="errorTable" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="504.0" prefWidth="945.0">
+               <columns>
+                  <TableColumn fx:id="nameColumn" prefWidth="262.0" text="Nome" />
+                  <TableColumn fx:id="dateColumn" prefWidth="234.0" text="Data" />
+                  <TableColumn fx:id="errorColumn" prefWidth="457.0" text="Erro" />
+               </columns>
+               <VBox.margin>
+                  <Insets left="16.0" right="16.0" />
+               </VBox.margin>
+            </TableView>
+         </children>
+      </VBox>
    </children>
 </Pane>

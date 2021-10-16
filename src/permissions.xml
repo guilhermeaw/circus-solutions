@@ -1,5 +1,7 @@
 <permissions>
         <role name='Operador'>
+                <!--permissions Admin-->
+                <permission access='false'>Admin.view</permission>
                 <!--permissions Artists-->
                 <permission access='true'>Artists.view</permission>
                 <permission access='true'>Artists.insert</permission>
@@ -32,6 +34,8 @@
                 <permission access='false'>Users.delete</permission>
 	</role>
 	<role name='Gerente'>
+                <!--permissions Admin-->
+                <permission access='true'>Admin.view</permission>
                 <!--permissions Artists-->
                 <permission access='true'>Artists.view</permission>
                 <permission access='true'>Artists.insert</permission>
@@ -64,6 +68,8 @@
                 <permission access='false'>Users.delete</permission>
 	</role>
 	<role name='Administrador'>
+                <!--permissions Admin-->
+                <permission access='true'>Admin.view</permission>
                 <!--permissions Artists-->
                 <permission access='true'>Artists.view</permission>
                 <permission access='true'>Artists.insert</permission>

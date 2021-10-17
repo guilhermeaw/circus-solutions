@@ -56,7 +56,7 @@ public class TicketOfficeController implements Initializable {
 
     @FXML
     void handleCloseSales(ActionEvent event) {
-      if (PermissionService.hasAccess(Operation.MODIFY, Pane.TICKET_OFFICE)) {
+      if (PermissionService.hasAccess(Operation.UPDATE, Pane.TICKET_OFFICE)) {
         if (AlertService.showConfirmation("Tem certeza que deseja encerrar a venda de ingressos?")) {
           currentShow.setIsShowActive(false);
           ShowManager.getInstance().update(currentShow);
@@ -68,7 +68,7 @@ public class TicketOfficeController implements Initializable {
 
     @FXML
     void handleSellTicket(ActionEvent event) {
-      if (PermissionService.hasAccess(Operation.MODIFY, Pane.TICKET_OFFICE)) {
+      if (PermissionService.hasAccess(Operation.UPDATE, Pane.TICKET_OFFICE)) {
         /*
           não permitir a venda se a data do show for igual ou anterior a atual
         */

@@ -122,7 +122,7 @@ public class ShowController implements Initializable {
 
     @FXML
     public void handleEditShow(ActionEvent event) {
-        if (PermissionService.hasAccess(Operation.MODIFY, Pane.SHOWS)) {
+        if (PermissionService.hasAccess(Operation.UPDATE, Pane.SHOWS)) {
             Show selectedShow = showsTable.getSelectionModel().getSelectedItem();
     
             if (selectedShow != null) {
@@ -167,7 +167,7 @@ public class ShowController implements Initializable {
 
     @FXML
     public void handleStartSales(ActionEvent event) {
-        if (PermissionService.hasAccess(Operation.MODIFY, Pane.SHOWS)) {
+        if (PermissionService.hasAccess(Operation.UPDATE, Pane.SHOWS)) {
             Show selectedShow = showsTable.getSelectionModel().getSelectedItem();
             Show currentActiveShow = ShowService.getCurrentActiveShow();
     

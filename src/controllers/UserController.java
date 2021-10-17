@@ -104,7 +104,7 @@ public class UserController implements Initializable {
 
   @FXML
   void handleEditUser(ActionEvent event) {
-    if (PermissionService.hasAccess(Operation.MODIFY, Pane.USERS)) {
+    if (PermissionService.hasAccess(Operation.UPDATE, Pane.USERS)) {
       User selectedUser = usersTable.getSelectionModel().getSelectedItem();
   
       if (selectedUser != null) {

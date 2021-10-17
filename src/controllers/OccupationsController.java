@@ -99,7 +99,7 @@ public class OccupationsController implements Initializable {
 
     @FXML
     public void handleEditOccupation(ActionEvent event) {
-        if (PermissionService.hasAccess(Operation.MODIFY, Pane.OCCUPATIONS)) {
+        if (PermissionService.hasAccess(Operation.UPDATE, Pane.OCCUPATIONS)) {
             Occupation selectedOccupation = occupationsTable.getSelectionModel().getSelectedItem();
     
             if (selectedOccupation != null) {

@@ -99,7 +99,7 @@ public class AttractionController implements Initializable {
 
     @FXML
     public void handleEditAttraction(ActionEvent event) {
-        if (PermissionService.hasAccess(Operation.MODIFY, Pane.ATTRACTIONS)) {
+        if (PermissionService.hasAccess(Operation.UPDATE, Pane.ATTRACTIONS)) {
             Attraction selectedAttraction = attractionsTable.getSelectionModel().getSelectedItem();
     
             if (selectedAttraction != null) {

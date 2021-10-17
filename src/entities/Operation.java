@@ -1,10 +1,10 @@
 package entities;
 
 public enum Operation {
-  VIEW("view"),
-  INSERT("insert"),
-  MODIFY("modify"),
-  DELETE("delete");
+  VIEW("VIEW"),
+  INSERT("INSERT"),
+  UPDATE("UPDATE"),
+  DELETE("DELETE");
 
   private final String name;
 

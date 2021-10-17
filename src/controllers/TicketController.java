@@ -67,7 +67,7 @@ public class TicketController implements Initializable {
 
     @FXML
     void handleEditTicketConfig(ActionEvent event) {
-        if (PermissionService.hasAccess(Operation.MODIFY, Pane.TICKETS)) {
+        if (PermissionService.hasAccess(Operation.UPDATE, Pane.TICKETS)) {
             Show currentActiveShow = ShowService.getCurrentActiveShow();
     
             if (currentActiveShow != null) {
@@ -85,7 +85,7 @@ public class TicketController implements Initializable {
 
     @FXML
     void handleUpdateTicketConfig(ActionEvent event) {
-        if (PermissionService.hasAccess(Operation.MODIFY, Pane.TICKETS)) {
+        if (PermissionService.hasAccess(Operation.UPDATE, Pane.TICKETS)) {
             TicketConfig ticketConfig = new TicketConfig();
     
             ticketConfig.setAuthor(ApplicationUtilities.getInstance().getActiveUser());

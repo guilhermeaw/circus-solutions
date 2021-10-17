@@ -1,104 +1,104 @@
 <permissions>
         <role name='Operador'>
                 <!--permissions Admin-->
-                <permission access='false'>Admin.view</permission>
+                <permission access='false'>Admin.VIEW</permission>
                 <!--permissions Artists-->
-                <permission access='true'>Artists.view</permission>
-                <permission access='true'>Artists.insert</permission>
-                <permission access='true'>Artists.modify</permission>
-                <permission access='false'>Artists.delete</permission>
+                <permission access='true'>Artists.VIEW</permission>
+                <permission access='true'>Artists.INSERT</permission>
+                <permission access='true'>Artists.UPDATE</permission>
+                <permission access='false'>Artists.DELETE</permission>
                 <!--permissions Occupations-->
-                <permission access='true'>Occupations.view</permission>
-                <permission access='true'>Occupations.insert</permission>
-                <permission access='true'>Occupations.modify</permission>
-                <permission access='false'>Occupations.delete</permission>
+                <permission access='true'>Occupations.VIEW</permission>
+                <permission access='true'>Occupations.INSERT</permission>
+                <permission access='true'>Occupations.UPDATE</permission>
+                <permission access='false'>Occupations.DELETE</permission>
                 <!--permissions Attractions-->
-                <permission access='true'>Attractions.view</permission>
-                <permission access='true'>Attractions.insert</permission>
-                <permission access='true'>Attractions.modify</permission>
-                <permission access='false'>Attractions.delete</permission>
+                <permission access='true'>Attractions.VIEW</permission>
+                <permission access='true'>Attractions.INSERT</permission>
+                <permission access='true'>Attractions.UPDATE</permission>
+                <permission access='false'>Attractions.DELETE</permission>
                 <!--permissions Shows-->
-                <permission access='true'>Shows.view</permission>
-                <permission access='true'>Shows.insert</permission>
-                <permission access='true'>Shows.modify</permission>
-                <permission access='false'>Shows.delete</permission>
+                <permission access='true'>Shows.VIEW</permission>
+                <permission access='true'>Shows.INSERT</permission>
+                <permission access='true'>Shows.UPDATE</permission>
+                <permission access='false'>Shows.DELETE</permission>
                 <!--permissions TicketOffice-->
-                <permission access='true'>TicketOffice.view</permission>
-                <permission access='true'>TicketOffice.modify</permission>
+                <permission access='true'>TicketOffice.VIEW</permission>
+                <permission access='true'>TicketOffice.UPDATE</permission>
                 <!--permissions Tickets-->
-                <permission access='true'>Tickets.view</permission>
-                <permission access='false'>Tickets.modify</permission>
+                <permission access='true'>Tickets.VIEW</permission>
+                <permission access='false'>Tickets.UPDATE</permission>
                 <!--permissions Users-->
-                <permission access='true'>Users.view</permission>
-                <permission access='false'>Users.modify</permission>
-                <permission access='false'>Users.delete</permission>
+                <permission access='true'>Users.VIEW</permission>
+                <permission access='false'>Users.UPDATE</permission>
+                <permission access='false'>Users.DELETE</permission>
 	</role>
 	<role name='Gerente'>
                 <!--permissions Admin-->
-                <permission access='true'>Admin.view</permission>
+                <permission access='true'>Admin.VIEW</permission>
                 <!--permissions Artists-->
-                <permission access='true'>Artists.view</permission>
-                <permission access='true'>Artists.insert</permission>
-                <permission access='true'>Artists.modify</permission>
-                <permission access='true'>Artists.delete</permission>
+                <permission access='true'>Artists.VIEW</permission>
+                <permission access='true'>Artists.INSERT</permission>
+                <permission access='true'>Artists.UPDATE</permission>
+                <permission access='true'>Artists.DELETE</permission>
                 <!--permissions Occupations-->
-                <permission access='true'>Occupations.view</permission>
-                <permission access='true'>Occupations.insert</permission>
-                <permission access='true'>Occupations.modify</permission>
-                <permission access='true'>Occupations.delete</permission>
+                <permission access='true'>Occupations.VIEW</permission>
+                <permission access='true'>Occupations.INSERT</permission>
+                <permission access='true'>Occupations.UPDATE</permission>
+                <permission access='true'>Occupations.DELETE</permission>
                 <!--permissions Attractions-->
-                <permission access='true'>Attractions.view</permission>
-                <permission access='true'>Attractions.insert</permission>
-                <permission access='true'>Attractions.modify</permission>
-                <permission access='true'>Attractions.delete</permission>
+                <permission access='true'>Attractions.VIEW</permission>
+                <permission access='true'>Attractions.INSERT</permission>
+                <permission access='true'>Attractions.UPDATE</permission>
+                <permission access='true'>Attractions.DELETE</permission>
                 <!--permissions Shows-->
-                <permission access='true'>Shows.view</permission>
-                <permission access='true'>Shows.insert</permission>
-                <permission access='true'>Shows.modify</permission>
-                <permission access='true'>Shows.delete</permission>
+                <permission access='true'>Shows.VIEW</permission>
+                <permission access='true'>Shows.INSERT</permission>
+                <permission access='true'>Shows.UPDATE</permission>
+                <permission access='true'>Shows.DELETE</permission>
                 <!--permissions TicketOffice-->
-                <permission access='true'>TicketOffice.view</permission>
-                <permission access='true'>TicketOffice.modify</permission>
+                <permission access='true'>TicketOffice.VIEW</permission>
+                <permission access='true'>TicketOffice.UPDATE</permission>
                 <!--permissions Tickets-->
-                <permission access='true'>Tickets.view</permission>
-                <permission access='true'>Tickets.modify</permission>
+                <permission access='true'>Tickets.VIEW</permission>
+                <permission access='true'>Tickets.UPDATE</permission>
                 <!--permissions Users-->
-                <permission access='true'>Users.view</permission>
-                <permission access='true'>Users.modify</permission>
-                <permission access='false'>Users.delete</permission>
+                <permission access='true'>Users.VIEW</permission>
+                <permission access='true'>Users.UPDATE</permission>
+                <permission access='false'>Users.DELETE</permission>
 	</role>
 	<role name='Administrador'>
                 <!--permissions Admin-->
-                <permission access='true'>Admin.view</permission>
+                <permission access='true'>Admin.VIEW</permission>
                 <!--permissions Artists-->
-                <permission access='true'>Artists.view</permission>
-                <permission access='true'>Artists.insert</permission>
-                <permission access='true'>Artists.modify</permission>
-                <permission access='true'>Artists.delete</permission>
+                <permission access='true'>Artists.VIEW</permission>
+                <permission access='true'>Artists.INSERT</permission>
+                <permission access='true'>Artists.UPDATE</permission>
+                <permission access='true'>Artists.DELETE</permission>
                 <!--permissions Occupations-->
-                <permission access='true'>Occupations.view</permission>
-                <permission access='true'>Occupations.insert</permission>
-                <permission access='true'>Occupations.modify</permission>
-                <permission access='true'>Occupations.delete</permission>
+                <permission access='true'>Occupations.VIEW</permission>
+                <permission access='true'>Occupations.INSERT</permission>
+                <permission access='true'>Occupations.UPDATE</permission>
+                <permission access='true'>Occupations.DELETE</permission>
                 <!--permissions Attractions-->
-                <permission access='true'>Attractions.view</permission>
-                <permission access='true'>Attractions.insert</permission>
-                <permission access='true'>Attractions.modify</permission>
-                <permission access='true'>Attractions.delete</permission>
+                <permission access='true'>Attractions.VIEW</permission>
+                <permission access='true'>Attractions.INSERT</permission>
+                <permission access='true'>Attractions.UPDATE</permission>
+                <permission access='true'>Attractions.DELETE</permission>
                 <!--permissions Shows-->
-                <permission access='true'>Shows.view</permission>
-                <permission access='true'>Shows.insert</permission>
-                <permission access='true'>Shows.modify</permission>
-                <permission access='true'>Shows.delete</permission>
+                <permission access='true'>Shows.VIEW</permission>
+                <permission access='true'>Shows.INSERT</permission>
+                <permission access='true'>Shows.UPDATE</permission>
+                <permission access='true'>Shows.DELETE</permission>
                 <!--permissions TicketOffice-->
-                <permission access='true'>TicketOffice.view</permission>
-                <permission access='true'>TicketOffice.modify</permission>
+                <permission access='true'>TicketOffice.VIEW</permission>
+                <permission access='true'>TicketOffice.UPDATE</permission>
                 <!--permissions Tickets-->
-                <permission access='true'>Tickets.view</permission>
-                <permission access='true'>Tickets.modify</permission>
+                <permission access='true'>Tickets.VIEW</permission>
+                <permission access='true'>Tickets.UPDATE</permission>
                 <!--permissions Users-->
-                <permission access='true'>Users.view</permission>
-                <permission access='true'>Users.modify</permission>
-                <permission access='true'>Users.delete</permission>
+                <permission access='true'>Users.VIEW</permission>
+                <permission access='true'>Users.UPDATE</permission>
+                <permission access='true'>Users.DELETE</permission>
 	</role>
 </permissions>

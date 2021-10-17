@@ -65,4 +65,22 @@ public class UserManager extends DefaultManager<User> {
       
     return userList;
   }
+
+  public List<User> getAll() {
+    List<User> userList = new ArrayList<User>();
+
+    try {
+      Database db = Database.getInstance();
+      Session session = db.openSession();
+      
+      session.beginTransaction();
+      userList = session.createQuery("FROM User", User.class).list();
+      session.getTransaction().commit();
+      session.close();
+    } catch (Exception e) {
+      handleException(e);
+    }
+      
+    return userList;
+  }
 }

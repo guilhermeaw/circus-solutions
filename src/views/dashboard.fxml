@@ -16,7 +16,7 @@
    <children>
       <HBox alignment="CENTER_RIGHT" layoutX="294.0" prefHeight="82.0" prefWidth="986.0" spacing="16.0" style="-fx-background-color: #F0F0F5;">
          <children>
-            <Button fx:id="buttonEditUser" mnemonicParsing="false" style="-fx-border-color: #000; -fx-border-width: 1;">
+            <Button fx:id="buttonEditUser" disable="true" mnemonicParsing="false" style="-fx-border-color: #000; -fx-border-width: 1;">
                <graphic>
                   <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                      <image>

@@ -25,7 +25,7 @@ public class Artist {
   @Column(name="cpf", unique=true, nullable=false, length=11)
   private String cpf;
 
-  @Column(name="phone", length=11)
+  @Column(name="phone", nullable=false, length=11)
   private String phone;
 
   @ManyToOne(fetch=FetchType.EAGER)

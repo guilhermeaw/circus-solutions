@@ -2,6 +2,7 @@ package utils;
 
 import entities.User;
 import javafx.stage.Stage;
+import javafx.stage.Window;
 import services.AlertService;
 import services.ErrorService;
 
@@ -22,6 +23,17 @@ public class ApplicationUtilities {
 
   private Stage primaryStage;
   private User activeUser;
+  private Window window;
+
+  public Window getWindow()
+  {
+      return window;
+  }
+
+  public String getCompany()
+  {
+      return "Circus Solution - Gestão de Circo";
+  }
 
   public Stage getPrimaryStage() {
       return primaryStage;

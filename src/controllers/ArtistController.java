@@ -1,5 +1,6 @@
 package controllers;
 
+import java.io.File;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -21,9 +22,12 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.Tooltip;
+import reports.ArtistListReport;
 import services.AlertService;
 import services.PermissionService;
 import utils.ApplicationUtilities;
+import utils.FileUtilities;
 
 public class ArtistController implements Initializable {
   @FXML
@@ -34,6 +38,9 @@ public class ArtistController implements Initializable {
 
   @FXML
   private Button buttonDelete;
+
+  @FXML
+  private Button buttonReport;
 
   @FXML
   private TableView<Artist> artistsTable;
@@ -56,6 +63,7 @@ public class ArtistController implements Initializable {
 
     buttonEdit.setDisable(true);
     buttonDelete.setDisable(true);
+    buttonReport.setTooltip(new Tooltip( "Gerar Relatório" ));
 
     artistsTable.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
       if (newSelection != null) {
@@ -144,6 +152,20 @@ public class ArtistController implements Initializable {
       } else {
         AlertService.showWarning("É necessário selecionar um artista");
       }
+    }
+  }
+
+  @FXML
+  public void handleReport(){
+    try {
+      File file = FileUtilities.saveFile( "Imprimir Relatório", "ArtistListReport-" + System.currentTimeMillis() +".pdf" );
+
+      if (file != null) {
+          ArtistListReport report = new ArtistListReport(ArtistManager.getInstance().getAll());
+          report.generatePDF(file);
+      }
+    } catch (Exception e) {
+        ApplicationUtilities.getInstance().handleException(e);
     }
   }
 }

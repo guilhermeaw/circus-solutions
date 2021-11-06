@@ -4,6 +4,7 @@ public enum Pane {
   ADMIN("Admin"),
   ARTISTS("Artists"),
   ATTRACTIONS("Attractions"),
+  GRAPHICS("Graphics"),
   OCCUPATIONS("Occupations"),
   SHOWS("Shows"),
   TICKET_OFFICE("TicketOffice"),

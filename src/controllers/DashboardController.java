@@ -49,6 +49,9 @@ public class DashboardController implements Initializable {
     @FXML
     private Button administrationButton;
 
+    @FXML
+    private Button graphicsButton;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
       loadDefaultPane();
@@ -68,6 +71,8 @@ public class DashboardController implements Initializable {
         loadPane("/views/components/panes/show.fxml");
       } else if (actionEvent.getSource() == administrationButton) {
         loadPane("/views/components/panes/auditErrorsTabbedPane.fxml");
+      } else if (actionEvent.getSource() == graphicsButton) {
+        loadPane("/views/components/panes/graphics.fxml");
       } else if (actionEvent.getSource() == ticketOfficeButton) {
         boolean hasActiveShow = ShowService.getCurrentActiveShow() != null;
         
@@ -110,6 +115,7 @@ public class DashboardController implements Initializable {
       boolean canAccessTicketOfficePane = PermissionService.hasAccess(Operation.VIEW, Pane.TICKET_OFFICE);
       boolean canAccessUsersPane = PermissionService.hasAccess(Operation.VIEW, Pane.USERS);
       boolean canAccessAdminPane = PermissionService.hasAccess(Operation.VIEW, Pane.ADMIN);
+      boolean canAccessGraphicPane = PermissionService.hasAccess(Operation.VIEW, Pane.ADMIN);
       
       artistsButton.setDisable(!canAccessArtistsPane);
       occupationsButton.setDisable(!canAccessOccupationsPane);
@@ -119,5 +125,6 @@ public class DashboardController implements Initializable {
       ticketOfficeButton.setDisable(!canAccessTicketOfficePane);
       usersButton.setDisable(!canAccessUsersPane);
       administrationButton.setDisable(!canAccessAdminPane);
+      graphicsButton.setDisable(!canAccessGraphicPane);
     }
 }

@@ -156,7 +156,7 @@ public class ArtistController implements Initializable {
   }
 
   @FXML
-  public void handleReport(){
+  public void handleReport() {
     try {
       File file = FileUtilities.saveFile( "Imprimir Relatório", "ArtistListReport-" + System.currentTimeMillis() +".pdf" );
 

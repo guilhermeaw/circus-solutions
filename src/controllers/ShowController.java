@@ -1,5 +1,6 @@
 package controllers;
 
+import java.io.File;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.List;
@@ -27,11 +28,13 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.util.Duration;
+import reports.ShowListReport;
 import services.AlertService;
 import services.PermissionService;
 import services.ShowService;
 import utils.ApplicationUtilities;
 import utils.DateUtils;
+import utils.FileUtilities;
 
 public class ShowController implements Initializable {
     @FXML
@@ -202,6 +205,20 @@ public class ShowController implements Initializable {
     
                 activeSalesNotification.show();
             }
+        }
+    }
+
+    @FXML
+    public void handleReport() {
+        try {
+            File file = FileUtilities.saveFile("Imprimir Relatório", "ShowListReport-" + System.currentTimeMillis() + ".pdf");
+
+            if (file != null) {
+                ShowListReport report = new ShowListReport(ShowManager.getInstance().getAll());
+                report.generatePDF(file);
+            }
+        } catch (Exception e) {
+            ApplicationUtilities.getInstance().handleException(e);
         }
     }
 }

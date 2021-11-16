@@ -1,11 +1,13 @@
 package controllers;
 
+import java.io.File;
 import java.net.URL;
 import java.sql.Timestamp;
 import java.util.Date;
 import java.util.ResourceBundle;
 
 import db.managers.TicketConfigManager;
+import db.managers.TicketSellManager;
 import entities.Operation;
 import entities.Pane;
 import entities.Show;
@@ -20,10 +22,12 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import reports.TicketListReport;
 import services.AlertService;
 import services.PermissionService;
 import services.ShowService;
 import utils.ApplicationUtilities;
+import utils.FileUtilities;
 
 public class TicketController implements Initializable {
     @FXML
@@ -122,4 +126,18 @@ public class TicketController implements Initializable {
             fieldValue.clear();
         }
     }
+
+    // @FXML
+    // public void handleReport() {
+    //     try {
+    //         File file = FileUtilities.saveFile("Imprimir Relatório", "TicketListReport-" + System.currentTimeMillis() + ".pdf");
+
+    //         if (file != null) {
+    //             TicketListReport report = new TicketListReport(TicketSellManager.getInstance().getAll());
+    //             report.generatePDF(file);
+    //         }
+    //     } catch (Exception e) {
+    //         ApplicationUtilities.getInstance().handleException(e);
+    //     }
+    // }
 }

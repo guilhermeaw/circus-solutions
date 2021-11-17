@@ -36,7 +36,7 @@ public class GraphicsController implements Initializable {
         XYChart.Series series = new XYChart.Series<String, Integer>();
         for ( Show show : shows )
         {
-            series.getData().add(new XYChart.Data(((Show) shows).toString(), 5000));
+            series.getData().add(new XYChart.Data(((Show) show).toString(), 5000));
             showByPriceChart.getData().addAll(series);
         }
 

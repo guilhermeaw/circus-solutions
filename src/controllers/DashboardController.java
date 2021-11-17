@@ -115,7 +115,7 @@ public class DashboardController implements Initializable {
       boolean canAccessTicketOfficePane = PermissionService.hasAccess(Operation.VIEW, Pane.TICKET_OFFICE);
       boolean canAccessUsersPane = PermissionService.hasAccess(Operation.VIEW, Pane.USERS);
       boolean canAccessAdminPane = PermissionService.hasAccess(Operation.VIEW, Pane.ADMIN);
-      boolean canAccessGraphicPane = PermissionService.hasAccess(Operation.VIEW, Pane.ADMIN);
+      boolean canAccessGraphicPane = PermissionService.hasAccess(Operation.VIEW, Pane.GRAPHICS);
       
       artistsButton.setDisable(!canAccessArtistsPane);
       occupationsButton.setDisable(!canAccessOccupationsPane);

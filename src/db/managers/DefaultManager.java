@@ -1,6 +1,5 @@
 package db.managers;
 
-import java.lang.reflect.ParameterizedType;
 import org.hibernate.Session;
 
 import db.Database;
@@ -69,13 +68,5 @@ public abstract class DefaultManager<T> {
 
   protected void handleException(Exception e) {
     ApplicationUtilities.getInstance().handleException(e);
-  }
-
-  private String getGenericName() { 
-    return getGenericClass().getSimpleName();
-  }
-
-  private Class<T> getGenericClass() { 
-    return ((Class<T>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0]);
   }
 }

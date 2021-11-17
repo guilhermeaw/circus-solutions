@@ -3,6 +3,7 @@ package controllers;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import db.managers.ShowChartManager;
 import db.managers.ShowManager;
 
 import java.util.List;
@@ -13,6 +14,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.XYChart;
+import wrappers.ShowTicketWrapper;
 
 public class GraphicsController implements Initializable {
 
@@ -20,7 +22,7 @@ public class GraphicsController implements Initializable {
     private BarChart<?, ?> showByPriceChart;
 
     @FXML
-    private BarChart<?, ?> showByQuantityChart;
+    private BarChart<String, Long> showByQuantityChart;
 
     private List<Show> shows;
 
@@ -48,10 +50,13 @@ public class GraphicsController implements Initializable {
     }
 
     private void composeShowByQuantityChart() {
-        XYChart.Series series = new XYChart.Series<String, Integer>();
-        series.getData().add(new XYChart.Data("Lajeado1 - 05/10/2021", 5000));
-        series.getData().add(new XYChart.Data("Lajeado2 - 05/11/2022", 7000));
-        series.getData().add(new XYChart.Data("Lajeado3 - 05/12/2023", 1000));
+        XYChart.Series<String, Long> series = new XYChart.Series<String, Long>();
+        List<ShowTicketWrapper> showTicketWrappers = ShowChartManager.getInstance().getShowsPerTicketSellQuantity();
+        
+        for (ShowTicketWrapper wrapper : showTicketWrappers) {
+            series.getData().add(new XYChart.Data<String, Long>(wrapper.getShow().toString(), wrapper.getQuantity()));
+        }
+
         showByQuantityChart.getData().addAll(series);
     }
 }

@@ -1,7 +1,5 @@
 package db.managers;
 
-import javax.persistence.NoResultException;
-
 import org.hibernate.Session;
 
 import db.Database;

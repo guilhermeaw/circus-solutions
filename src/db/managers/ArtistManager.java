@@ -90,7 +90,7 @@ public class ArtistManager extends DefaultManager<Artist> {
       parameters.put("artist", artist.getId());
     }
 
-    if (artist != null) {
+    if (occupation != null) {
         conditions.add(" ref_occupation = :occupation");
         parameters.put("occupation", occupation.getId());
       }

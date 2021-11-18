@@ -22,7 +22,7 @@ public class TicketSell {
 
   @GenericGenerator(name="incgenerator" , strategy="increment")
   @GeneratedValue(generator="incgenerator")
-  @Column(name="sequential", unique=true, nullable=false)
+  @Column(name="sequential", nullable=false)
   private int sequential;
 
   @ManyToOne(fetch=FetchType.EAGER)

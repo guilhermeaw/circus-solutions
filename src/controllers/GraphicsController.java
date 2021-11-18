@@ -19,12 +19,10 @@ import wrappers.ShowTicketWrapper;
 public class GraphicsController implements Initializable {
 
     @FXML
-    private BarChart<?, ?> showByPriceChart;
+    private BarChart<String, Double> showByPriceChart;
 
     @FXML
     private BarChart<String, Long> showByQuantityChart;
-
-    private List<Show> shows;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -33,20 +31,16 @@ public class GraphicsController implements Initializable {
     }
 
     private void composeShowByPriceChart() {
-        shows = ShowManager.getInstance().getAll();
-
-        XYChart.Series series = new XYChart.Series<String, Integer>();
-        for ( Show show : shows )
-        {
-            series.getData().add(new XYChart.Data(((Show) show).toString(), 5000));
-            showByPriceChart.getData().addAll(series);
+        XYChart.Series<String, Double> series = new XYChart.Series<String, Double>();
+        List<ShowTicketWrapper> showTicketWrappers = ShowChartManager.getInstance().getShowsPerTotalTicketValue();
+        
+        for (ShowTicketWrapper wrapper : showTicketWrappers) {
+            series.getData().add(new XYChart.Data<String, Double>(wrapper.getShow().toString(), wrapper.getTotalTicketValue()));
         }
 
-        // XYChart.Series series = new XYChart.Series<String, Integer>();
-        // series.getData().add(new XYChart.Data(shows.getCity().toString(), 5000));
-        // series.getData().add(new XYChart.Data("Lajeado2 - 05/11/2022", 7000));
-        // series.getData().add(new XYChart.Data("Lajeado3 - 05/12/2023", 1000));
-        // showByPriceChart.getData().addAll(series);
+        showByPriceChart.getData().addAll(series);
+        showByPriceChart.getYAxis().setLabel("Valor arrecadado (R$)");
+        showByPriceChart.getXAxis().setLabel("Espetáculos");
     }
 
     private void composeShowByQuantityChart() {
@@ -58,5 +52,7 @@ public class GraphicsController implements Initializable {
         }
 
         showByQuantityChart.getData().addAll(series);
+        showByQuantityChart.getYAxis().setLabel("Quantidade de ingressos vendidos");
+        showByQuantityChart.getXAxis().setLabel("Espetáculos");
     }
 }

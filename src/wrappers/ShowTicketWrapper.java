@@ -5,7 +5,7 @@ import entities.Show;
 public class ShowTicketWrapper {
   private Show show;
   private Long quantity = (long) 0;
-  private int ticketPrice = 0;
+  private double totalTicketValue = 0;
 
   public ShowTicketWrapper() {}
 
@@ -25,11 +25,11 @@ public class ShowTicketWrapper {
         this.quantity = quantity;
     }
 
-    public int getTicketPrice() {
-        return ticketPrice;
+    public double getTotalTicketValue() {
+        return totalTicketValue;
     }
 
-    public void setTicketPrice(int ticketPrice) {
-        this.ticketPrice = ticketPrice;
+    public void setTotalTicketValue(double totalTicketValue) {
+        this.totalTicketValue = totalTicketValue;
     }
 }

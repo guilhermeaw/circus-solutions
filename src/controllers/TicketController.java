@@ -50,6 +50,8 @@ public class TicketController implements Initializable {
 
     private TicketConfig source = null;
     private SimpleDoubleProperty currencyAmount = new SimpleDoubleProperty(this, "amount", 0.00);
+
+    private Show currentShow = null;
     
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -127,17 +129,19 @@ public class TicketController implements Initializable {
         }
     }
 
-    // @FXML
-    // public void handleReport() {
-    //     try {
-    //         File file = FileUtilities.saveFile("Imprimir Relatório", "TicketListReport-" + System.currentTimeMillis() + ".pdf");
+    @FXML
+    public void handleReport() {
+        try {
+            File file = FileUtilities.saveFile("Imprimir Relatório", "TicketListReport-" + System.currentTimeMillis() + ".pdf");
 
-    //         if (file != null) {
-    //             TicketListReport report = new TicketListReport(TicketSellManager.getInstance().getAll());
-    //             report.generatePDF(file);
-    //         }
-    //     } catch (Exception e) {
-    //         ApplicationUtilities.getInstance().handleException(e);
-    //     }
-    // }
+            if (file != null) {
+                //Pegar o último ingresso de show da sequência (sequential) que esteja ativo.
+
+                //TicketListReport report = new TicketListReport(TicketSellManager.getInstance().getLastSequential(currentActiveShow));
+                //report.generatePDF(file);
+            }
+        } catch (Exception e) {
+            ApplicationUtilities.getInstance().handleException(e);
+        }
+    }
 }

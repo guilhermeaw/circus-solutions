@@ -92,7 +92,8 @@ public class ShowController implements Initializable {
 
     public void refreshContent() {
         try {
-            List<Show> shows = ShowManager.getInstance().getAll();
+            List<Show> shows = ShowManager.getInstance().getByFilter(filter);
+            //List<Show> shows = ShowManager.getInstance().getAll();
 
             ObservableList<Show> showObservableList = FXCollections.observableArrayList(shows);          
 
@@ -216,7 +217,8 @@ public class ShowController implements Initializable {
             File file = FileUtilities.saveFile("Imprimir Relatório", "ShowListReport-" + System.currentTimeMillis() + ".pdf");
 
             if (file != null) {
-                ShowListReport report = new ShowListReport(ShowManager.getInstance().getAll());
+                ShowListReport report = new ShowListReport(ShowManager.getInstance().getByFilter(filter));
+                //ShowListReport report = new ShowListReport(ShowManager.getInstance().getAll());
                 report.generatePDF(file);
             }
         } catch (Exception e) {

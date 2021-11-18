@@ -1,19 +1,16 @@
 package filters.editors;
 
 import java.sql.Date;
+
+
 import java.time.LocalDate;
-import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import common.DefaultEditor;
 import common.EditorCallback;
-import db.managers.CityManager;
 import db.managers.UserManager;
 import entities.City;
-import entities.Operation;
 import entities.User;
-import filters.data.AuditFilter;
 import filters.data.ShowFilter;
 import javafx.collections.FXCollections;
 import javafx.geometry.Insets;

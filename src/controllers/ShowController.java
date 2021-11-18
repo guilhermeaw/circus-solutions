@@ -16,6 +16,8 @@ import entities.Operation;
 import entities.Pane;
 import entities.Show;
 import entities.TicketConfig;
+import filters.data.ShowFilter;
+import filters.editors.ShowFilterEditor;
 import formatters.DateFormatter;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -221,4 +223,20 @@ public class ShowController implements Initializable {
             ApplicationUtilities.getInstance().handleException(e);
         }
     }
+
+    @FXML
+    void handleOpenFilter(ActionEvent event) {
+        new ShowFilterEditor(new EditorCallback<ShowFilter>(filter) {
+        @Override
+        public void onEvent() {
+            try {
+                refreshContent();
+            } catch ( Exception e ) {
+                ApplicationUtilities.getInstance().handleException(e);
+            }
+        }
+        }).open();
+    }
+
+    private ShowFilter filter = new ShowFilter();
 }

@@ -11,6 +11,8 @@ import editors.ArtistEditor;
 import entities.Artist;
 import entities.Operation;
 import entities.Pane;
+import filters.data.ArtistFilter;
+import filters.editors.ArtistFilterEditor;
 import formatters.CpfFormatter;
 import formatters.PhoneFormatter;
 import javafx.beans.property.SimpleStringProperty;
@@ -168,4 +170,20 @@ public class ArtistController implements Initializable {
         ApplicationUtilities.getInstance().handleException(e);
     }
   }
+
+  @FXML
+  void handleOpenFilter(ActionEvent event) {
+    new ArtistFilterEditor(new EditorCallback<ArtistFilter>(filter) {
+      @Override
+      public void onEvent() {
+          try {
+              refreshContent();
+          } catch ( Exception e ) {
+              ApplicationUtilities.getInstance().handleException(e);
+          }
+      }
+    }).open();
+  }
+
+  private ArtistFilter filter = new ArtistFilter();
 }

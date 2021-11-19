@@ -13,6 +13,7 @@ public class TicketListReport extends ReportToolkit
 
     private final String[] header = new String[]
     {
+            "Autor",
             "Data de Criação",
             "Valor"
     };
@@ -20,6 +21,7 @@ public class TicketListReport extends ReportToolkit
     private final float[] columnWidths = new float[]
     {
             15f,
+            8f,
             8f
     };
 

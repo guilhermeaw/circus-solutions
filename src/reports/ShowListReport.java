@@ -20,8 +20,8 @@ public class ShowListReport extends ReportToolkit
 
     private final float[] columnWidths = new float[]
     {
-            15f,
             8f,
+            15f,
             8f
     };
 

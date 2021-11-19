@@ -37,6 +37,15 @@
                               </ImageView>
                            </graphic>
                         </Button>
+                        <Button fx:id="buttonFilter" mnemonicParsing="false" onAction="#handleOpenFilter" prefHeight="49.0" prefWidth="122.0" style="-fx-font-weight: bold;" text="Filtrar">
+                           <graphic>
+                              <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../../res/images/filter.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
                         <Button fx:id="buttonAdd" mnemonicParsing="false" onAction="#handleAddArtist" prefHeight="49.0" prefWidth="122.0" style="-fx-font-weight: bold;" text="Adicionar">
                            <font>
                               <Font name="System Bold" size="12.0" />

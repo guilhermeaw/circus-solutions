@@ -33,6 +33,16 @@ public class CityManager {
     return getCityByIdFromJson(id);
   }
 
+  public List<City> getByIdList(List<Long> ids) {
+    List<City> cities = new ArrayList<City>();
+
+    for (Long id : ids) {
+      cities.add(getCityByIdFromJson(id));
+    }
+    
+    return cities;
+  }
+
   public List<City> getAllByState(State state) {
     List<City> cities = getCitiesByStateFromJson(state);
     

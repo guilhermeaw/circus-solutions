@@ -16,6 +16,8 @@ import entities.Operation;
 import entities.Pane;
 import entities.Show;
 import entities.TicketConfig;
+import filters.data.ShowFilter;
+import filters.editors.ShowFilterEditor;
 import formatters.DateFormatter;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -90,7 +92,8 @@ public class ShowController implements Initializable {
 
     public void refreshContent() {
         try {
-            List<Show> shows = ShowManager.getInstance().getAll();
+            List<Show> shows = ShowManager.getInstance().getByFilter(filter);
+            //List<Show> shows = ShowManager.getInstance().getAll();
 
             ObservableList<Show> showObservableList = FXCollections.observableArrayList(shows);          
 
@@ -214,11 +217,28 @@ public class ShowController implements Initializable {
             File file = FileUtilities.saveFile("Imprimir Relatório", "ShowListReport-" + System.currentTimeMillis() + ".pdf");
 
             if (file != null) {
-                ShowListReport report = new ShowListReport(ShowManager.getInstance().getAll());
+                ShowListReport report = new ShowListReport(ShowManager.getInstance().getByFilter(filter));
+                //ShowListReport report = new ShowListReport(ShowManager.getInstance().getAll());
                 report.generatePDF(file);
             }
         } catch (Exception e) {
             ApplicationUtilities.getInstance().handleException(e);
         }
     }
+
+    @FXML
+    void handleOpenFilter(ActionEvent event) {
+        new ShowFilterEditor(new EditorCallback<ShowFilter>(filter) {
+        @Override
+        public void onEvent() {
+            try {
+                refreshContent();
+            } catch ( Exception e ) {
+                ApplicationUtilities.getInstance().handleException(e);
+            }
+        }
+        }).open();
+    }
+
+    private ShowFilter filter = new ShowFilter();
 }

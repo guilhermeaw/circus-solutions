@@ -151,7 +151,6 @@ public abstract class ReportToolkit
         writer.setPageEvent( event );
     }
 
-
     public void generatePDF( File file ) throws Exception
     {
         Platform.runLater( new Runnable()
@@ -175,6 +174,7 @@ public abstract class ReportToolkit
 
                     document.close();
 
+                    
                     Notifications pdfNotification = Notifications.create()
                             .title( "Relatório Gerado!" )
                             .text( "Clique aqui para abrir" )

@@ -8,6 +8,8 @@ import java.util.List;
 
 import common.DefaultEditor;
 import common.EditorCallback;
+import db.managers.CityManager;
+import db.managers.ShowManager;
 import db.managers.UserManager;
 import entities.City;
 import entities.User;
@@ -77,9 +79,11 @@ public class ShowFilterEditor extends DefaultEditor<ShowFilter> {
 
   private void loadComboItems() {
     List<User> authors = UserManager.getInstance().getAll();
-    //List<City> citys = CityManager.getInstance().getAll();
     
-    //cbCity.setItems(FXCollections.observableArrayList(citys));
+    List<Long> idsOfCitiesWithShows = ShowManager.getInstance().getIdsOfCitiesWithShows();
+    List<City> cities = CityManager.getInstance().getByIdList(idsOfCitiesWithShows);
+    
+    cbCity.setItems(FXCollections.observableArrayList(cities));
     cbAuthor.setItems(FXCollections.observableArrayList(authors));
   }
   

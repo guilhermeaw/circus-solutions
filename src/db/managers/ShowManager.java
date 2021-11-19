@@ -1,5 +1,6 @@
 package db.managers;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -40,6 +41,29 @@ public class ShowManager extends DefaultManager<Show> {
       show.setCity(city);
 
       return show;
+  }
+
+  public List<Long> getIdsOfCitiesWithShows() {
+    List<Long> citiesIds = new ArrayList<Long>();
+    
+    try {
+      Database db = Database.getInstance();
+      Session session = db.openSession();
+  
+      session.beginTransaction();
+      Object result = session.createQuery("select distinct s.cityId from Show s").list();
+
+      if (result != null) {
+        citiesIds = (List<Long>) result;
+      }
+
+      session.getTransaction().commit();
+      session.close(); 
+    } catch (Exception e) {
+      handleException(e);
+    }  
+
+    return citiesIds;
   }
 
   public Show getActiveShow() {
@@ -113,6 +137,11 @@ public class ShowManager extends DefaultManager<Show> {
       }
 
       showsList = query.list();
+
+      for (Show show : showsList) {
+        show.setCity(CityManager.getInstance().getById(show.getCityId()));
+      }
+
       session.getTransaction().commit();
       session.close();
     } catch (Exception e) {
@@ -128,16 +157,28 @@ public class ShowManager extends DefaultManager<Show> {
 
     User author = filter.getAuthor();
     City city = filter.getCity();
+    Date startDate = filter.getStartDate();
+    Date endDate = filter.getEndDate();
 
     if (author != null) {
-      conditions.add(" ref_author = :author");
+      conditions.add(" ref_user = :author");
       parameters.put("author", author.getId());
     }
 
     if (city != null) {
-        conditions.add(" ref_city = :city");
-        parameters.put("city", city.getId());
-      }
+      conditions.add(" ref_city = :city");
+      parameters.put("city", city.getId());
+    }
+
+    if (startDate != null) {
+      conditions.add(" date >= :startDate");
+      parameters.put("startDate", startDate);
+    }
+
+    if (endDate != null) {
+      conditions.add(" date <= :endDate");
+      parameters.put("endDate", endDate);
+    }
 
     for (int i = 0; i < conditions.size(); i++) {
       String preffix = i == 0 ? " where" : " and";

@@ -25,7 +25,7 @@
                   </Text>
                   <HBox alignment="TOP_RIGHT" prefHeight="49.0" prefWidth="886.0" spacing="16.0">
                      <HBox.margin>
-                        <Insets right="24.0" />
+                        <Insets right="20.0" />
                      </HBox.margin>
                   </HBox>
                </children>

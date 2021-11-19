@@ -86,8 +86,8 @@ public class ArtistManager extends DefaultManager<Artist> {
     Occupation occupation = filter.getOccupation();
 
     if (artist != null) {
-      conditions.add(" ref_artist = :artist");
-      parameters.put("artist", artist.getId());
+      conditions.add(" name = :artist");
+      parameters.put("artist", artist.getName());
     }
 
     if (occupation != null) {

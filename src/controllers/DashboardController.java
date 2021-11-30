@@ -21,6 +21,9 @@ import utils.ApplicationUtilities;
 public class DashboardController implements Initializable {
     @FXML
     private Button buttonLogout;
+    
+    @FXML
+    private Button buttonEditUser;
 
     @FXML
     private StackPane dashboardStackPane;
@@ -88,8 +91,13 @@ public class DashboardController implements Initializable {
   }
     
     @FXML
-    void handleLogout(ActionEvent event) {
+    public void handleLogout(ActionEvent event) {
       LoginService.doLogout();
+    }
+
+    @FXML
+    public void handleEditUser(ActionEvent event) {
+      loadPane("/views/components/panes/userEditor.fxml");
     }
 
     private void loadDefaultPane() {

@@ -1,6 +1,7 @@
 package utils;
 
 import entities.User;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import javafx.stage.Window;
 import services.AlertService;
@@ -24,6 +25,7 @@ public class ApplicationUtilities {
   private Stage primaryStage;
   private User activeUser;
   private Window window;
+  private StackPane stackPane;
 
   public Window getWindow()
   {
@@ -78,5 +80,13 @@ public class ApplicationUtilities {
     }
 
     return errorMessage;
-}
+  }
+
+  public void setDashboardPane(StackPane stackPane) {
+    this.stackPane = stackPane;
+  }
+
+  public StackPane getDashboardPane() {
+    return stackPane;
+  }
 }

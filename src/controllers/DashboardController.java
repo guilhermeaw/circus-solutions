@@ -59,6 +59,7 @@ public class DashboardController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
       loadDefaultPane();
       loadViewPermissions();
+      ApplicationUtilities.getInstance().setDashboardPane(dashboardStackPane);
     }
 
     public void handleChangePane(ActionEvent actionEvent) {

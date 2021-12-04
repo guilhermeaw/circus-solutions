@@ -24,11 +24,15 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
+import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.Tooltip;
+import javafx.scene.layout.StackPane;
 import javafx.util.Duration;
 import reports.ShowListReport;
 import services.AlertService;
@@ -50,6 +54,15 @@ public class ShowController implements Initializable {
 
     @FXML
     private Button buttonStartSales;
+
+    @FXML
+    private Button buttonSchedule;
+
+    @FXML
+    private Button buttonReport;
+
+    @FXML
+    private Button buttonFilter;
 
     @FXML
     private TableView<Show> showsTable;
@@ -76,16 +89,24 @@ public class ShowController implements Initializable {
         buttonEdit.setDisable(true);
         buttonDelete.setDisable(true);
         buttonStartSales.setDisable(true);
+        buttonSchedule.setDisable(true);
+
+        buttonSchedule.setTooltip(new Tooltip("Gerenciar cronogramas"));
+        buttonStartSales.setTooltip(new Tooltip("Iniciar vendas"));
+        buttonFilter.setTooltip(new Tooltip("Filtrar"));
+        buttonReport.setTooltip(new Tooltip("Imprimir relatório"));
 
         showsTable.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
           if (newSelection != null) {
             buttonEdit.setDisable(false);
             buttonDelete.setDisable(false);
             buttonStartSales.setDisable(false);
+            buttonSchedule.setDisable(false);
           } else {
             buttonEdit.setDisable(true);
             buttonDelete.setDisable(true);
             buttonStartSales.setDisable(true);
+            buttonSchedule.setDisable(true);
           }
         });   
     }  
@@ -219,6 +240,18 @@ public class ShowController implements Initializable {
                 ShowListReport report = new ShowListReport(ShowManager.getInstance().getByFilter(filter));
                 report.generatePDF(file);
             }
+        } catch (Exception e) {
+            ApplicationUtilities.getInstance().handleException(e);
+        }
+    }
+
+    @FXML
+    public void handleManageSchedule() {
+        try {
+            StackPane dashboardPane = ApplicationUtilities.getInstance().getDashboardPane();
+            Parent pane = FXMLLoader.load(getClass().getResource("/views/components/panes/schedules.fxml"));
+
+            dashboardPane.getChildren().setAll(pane);
         } catch (Exception e) {
             ApplicationUtilities.getInstance().handleException(e);
         }

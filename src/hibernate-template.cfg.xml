@@ -15,14 +15,15 @@
 
 		<mapping class="entities.Artist" />
 		<mapping class="entities.Attraction" />
+		<mapping class="entities.Audit" />
+		<mapping class="entities.Error" />
+		<mapping class="entities.Login" />
 		<mapping class="entities.Occupation" />
+		<mapping class="entities.Schedule" />
 		<mapping class="entities.Show" />
 		<mapping class="entities.TicketConfig" />
 		<mapping class="entities.TicketSell" />
 		<mapping class="entities.User" />
-		<mapping class="entities.Login" />
-		<mapping class="entities.Audit" />
-		<mapping class="entities.Error" />
 
 	</session-factory>
 </hibernate-configuration>

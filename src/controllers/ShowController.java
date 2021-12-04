@@ -249,7 +249,15 @@ public class ShowController implements Initializable {
     public void handleManageSchedule() {
         try {
             StackPane dashboardPane = ApplicationUtilities.getInstance().getDashboardPane();
-            Parent pane = FXMLLoader.load(getClass().getResource("/views/components/panes/schedules.fxml"));
+
+            FXMLLoader fxmlLoader = new FXMLLoader();
+            fxmlLoader.setLocation(getClass().getResource("/views/components/panes/schedules.fxml"));
+            Parent pane = fxmlLoader.load();
+
+            Show selectedShow = showsTable.getSelectionModel().getSelectedItem();
+            
+            ScheduleController scheduleController = fxmlLoader.getController();
+            scheduleController.setData(selectedShow);
 
             dashboardPane.getChildren().setAll(pane);
         } catch (Exception e) {

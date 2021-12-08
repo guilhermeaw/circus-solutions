@@ -1,6 +1,6 @@
 package entities;
 
-import java.sql.Timestamp;
+import java.time.LocalTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -35,10 +35,10 @@ public class Schedule {
   private Artist artist;
 
   @Column(name="start_time")
-  private Timestamp startTime;
+  private LocalTime startTime;
   
   @Column(name="end_time")
-  private Timestamp endTime;
+  private LocalTime endTime;
 
     public int getId() {
         return id;
@@ -72,19 +72,19 @@ public class Schedule {
         this.artist = artist;
     }
 
-    public Timestamp getStartTime() {
+    public LocalTime getStartTime() {
         return startTime;
     }
 
-    public void setStartTime(Timestamp startTime) {
+    public void setStartTime(LocalTime startTime) {
         this.startTime = startTime;
     }
 
-    public Timestamp getEndTime() {
+    public LocalTime getEndTime() {
         return endTime;
     }
 
-    public void setEndTime(Timestamp endTime) {
+    public void setEndTime(LocalTime endTime) {
         this.endTime = endTime;
     }
 }

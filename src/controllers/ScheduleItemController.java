@@ -1,11 +1,11 @@
 package controllers;
 
 import java.net.URL;
-import java.sql.Date;
-import java.sql.Timestamp;
+import java.time.LocalTime;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import common.TimeSpinner;
 import controllers.ScheduleController.ScheduleRemoveListener;
 import db.managers.ArtistManager;
 import db.managers.AttractionsManager;
@@ -21,8 +21,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.DatePicker;
-import utils.DateUtils;
+import javafx.scene.layout.HBox;
 
 public class ScheduleItemController implements Initializable {
 
@@ -33,10 +32,10 @@ public class ScheduleItemController implements Initializable {
     private ComboBox<Artist> comboArtist;
 
     @FXML
-    private DatePicker startDatePicker;
+    private HBox startTimeWrapper;
 
     @FXML
-    private DatePicker endDatePicker;
+    private HBox endTimeWrapper;
 
     @FXML
     private Button buttonDelete;
@@ -47,6 +46,7 @@ public class ScheduleItemController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         loadComboItems();
+        loadTimeSpinners();
 
         comboArtist.valueProperty().addListener(new ChangeListener<Artist>() {
             @Override
@@ -63,6 +63,16 @@ public class ScheduleItemController implements Initializable {
                 ScheduleManager.getInstance().update(schedule);
             }
         });
+
+        startTimer.valueProperty().addListener((obs, oldTime, newTime) -> {
+            schedule.setStartTime(newTime);
+            ScheduleManager.getInstance().update(schedule);
+        });
+
+        endTimer.valueProperty().addListener((obs, oldTime, newTime) -> {
+            schedule.setEndTime(newTime);
+            ScheduleManager.getInstance().update(schedule);
+        });
     }
 
     @FXML
@@ -74,13 +84,13 @@ public class ScheduleItemController implements Initializable {
         this.schedule = schedule;
         this.scheduleRemoveListener = scheduleRemoveListener;
 
-        Timestamp startTime = schedule.getStartTime();
-        Timestamp endTime = schedule.getEndTime();
+        LocalTime startTime = schedule.getStartTime();
+        LocalTime endTime = schedule.getEndTime();
 
         comboAttraction.setValue(schedule.getAttraction());
         comboArtist.setValue(schedule.getArtist());
-        startDatePicker.setValue(startTime != null ? DateUtils.getLocalDateByDate(new Date(startTime.getTime())): null);
-        endDatePicker.setValue(endTime != null ? DateUtils.getLocalDateByDate(new Date(endTime.getTime())) : null);
+        startTimer.getValueFactory().setValue(startTime != null ? startTime : LocalTime.MIN);
+        endTimer.getValueFactory().setValue(endTime != null ? endTime : LocalTime.MIN);
     }
 
     private void loadComboItems() {
@@ -90,4 +100,15 @@ public class ScheduleItemController implements Initializable {
         comboAttraction.setItems(FXCollections.observableArrayList(attractions));
         comboArtist.setItems(FXCollections.observableArrayList(artists));
     }
+
+    private void loadTimeSpinners() {
+        startTimer.setMinWidth(220);
+        endTimer.setMinWidth(220);
+        
+        startTimeWrapper.getChildren().add(startTimer);
+        endTimeWrapper.getChildren().add(endTimer);
+    }
+
+    private TimeSpinner startTimer = new TimeSpinner();
+    private TimeSpinner endTimer = new TimeSpinner();
 }

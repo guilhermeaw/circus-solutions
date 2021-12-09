@@ -11,6 +11,7 @@ import entities.Role;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
+
 import java.io.IOException;
 
 public class PermissionXMLReader extends DefaultHandler {
@@ -37,7 +38,7 @@ public class PermissionXMLReader extends DefaultHandler {
 
         try {
             saxParser = factory.newSAXParser();
-            saxParser.parse("src/permissions.xml", this);
+            saxParser.parse(getClass().getResourceAsStream("/permissions.xml"), this);
         } catch (ParserConfigurationException | SAXException | IOException e) {
             ApplicationUtilities.getInstance().handleException(e);
         }

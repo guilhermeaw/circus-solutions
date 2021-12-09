@@ -1,6 +1,7 @@
 package db.managers;
 
 import java.io.FileReader;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -104,9 +105,9 @@ public class CityManager {
       JSONObject citiesStates;
       JSONParser parser = new JSONParser();
       
-      FileReader fileReader = new FileReader(getClass().getResource("/res/cities-states.json").getFile());
+      InputStreamReader reader = new InputStreamReader(getClass().getResourceAsStream("/res/cities-states.json"));
 
-      citiesStates = (JSONObject) parser.parse(fileReader);
+      citiesStates = (JSONObject) parser.parse(reader);
       result = (JSONArray) citiesStates.get("cities");
     } catch (Exception e) {
       ApplicationUtilities.getInstance().handleException(e);

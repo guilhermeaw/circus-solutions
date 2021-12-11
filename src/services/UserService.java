@@ -7,6 +7,10 @@ import entities.User;
 
 public class UserService {
   public static void createUser(Credentials credentials, String name) throws Exception {
+    createUser(credentials, name, Role.OPERATOR);
+  }
+
+  public static void createUser(Credentials credentials, String name, Role role) throws Exception {
     User user = new User();
 
     String login = credentials.getLogin();
@@ -15,12 +19,16 @@ public class UserService {
     user.setName(name);
     user.setLogin(login);
     user.setPassword(HashService.hash(password));
-    user.setRole(Role.OPERATOR);
+    user.setRole(role);
 
     UserManager.getInstance().create(user);
   }
 
   public static void updateUser(User user) throws Exception {
     UserManager.getInstance().update(user);
+  }
+
+  public static boolean alreadyHasAnyUser() throws Exception {
+    return UserManager.getInstance().getById(User.class, 1) != null;
   }
 }

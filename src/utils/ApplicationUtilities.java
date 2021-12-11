@@ -1,15 +1,19 @@
 package utils;
 
+import entities.Role;
 import entities.User;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import javafx.stage.Window;
 import services.AlertService;
 import services.ErrorService;
+import services.UserService;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.List;
+
+import common.Credentials;
 
 public class ApplicationUtilities {
   private static ApplicationUtilities instance;
@@ -88,5 +92,15 @@ public class ApplicationUtilities {
 
   public StackPane getDashboardPane() {
     return stackPane;
+  }
+
+  public void createUserAdminIfNotExists() {
+    try {
+      if (!UserService.alreadyHasAnyUser()) {
+        UserService.createUser(new Credentials("admin", "admin"), "Usuário Administrador", Role.ADMIN);
+      }
+    } catch (Exception e) {
+      handleException(e);
+    }
   }
 }

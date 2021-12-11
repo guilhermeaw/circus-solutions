@@ -110,7 +110,7 @@ public class UserEditorController implements Initializable {
           errors.add("É necessário informar um nome completo");
       }
 
-      if (!PasswordValidator.validate(password)) {
+      if (password != null && !password.isEmpty() && !PasswordValidator.validate(password)) {
           errors.add("A senha deve ter mais de 4 caracteres");
       }
 

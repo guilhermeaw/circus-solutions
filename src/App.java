@@ -15,6 +15,7 @@ public class App extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         ApplicationUtilities.getInstance().setPrimaryStage(primaryStage);
+        ApplicationUtilities.getInstance().createUserAdminIfNotExists();
 
         String location = "views/login.fxml";
         
